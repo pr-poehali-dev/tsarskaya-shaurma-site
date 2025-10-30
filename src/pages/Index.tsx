@@ -4,38 +4,159 @@ import { Badge } from "@/components/ui/badge";
 import Icon from "@/components/ui/icon";
 
 export default function Index() {
-  const menuItems = [
+  const meatTypes = [
+    { id: 1, name: "Курятина", icon: "🐔" },
+    { id: 2, name: "Говядина", icon: "🐄" },
+    { id: 3, name: "Свинина", icon: "🐷" },
+    { id: 4, name: "Баранина", icon: "🐑" },
+    { id: 5, name: "Индейка", icon: "🦃" },
+    { id: 6, name: "Утка", icon: "🦆" }
+  ];
+
+  const salads = [
     {
       id: 1,
-      name: "Царская классическая",
-      description: "Сочная курица, свежие овощи, фирменный соус",
-      price: 320,
-      image: "https://cdn.poehali.dev/projects/e90906d7-b9fe-4eb5-9ad3-bc94366fa418/files/4de4d6a6-0ff8-4bba-9bba-08566d7b728c.jpg",
-      popular: true
+      name: "Салат Селёдочка по-домашнему",
+      ingredients: "Сельдь, картофель, лук, яйцо, майонез",
+      price: 3000
     },
     {
       id: 2,
-      name: "Царская говяжья",
-      description: "Мраморная говядина, хрустящие овощи, острый соус",
-      price: 380,
-      image: "https://cdn.poehali.dev/projects/e90906d7-b9fe-4eb5-9ad3-bc94366fa418/files/729e5d98-a5b5-4ae4-9c43-3ced24cba4ef.jpg",
-      popular: true
+      name: "Салат Овощной светофор",
+      ingredients: "Помидоры, огурцы, болгарский перец, лук, масло",
+      price: 3000
     },
     {
       id: 3,
-      name: "Царское ассорти",
-      description: "Микс из курицы и говядины, королевский соус",
-      price: 420,
-      image: "https://cdn.poehali.dev/projects/e90906d7-b9fe-4eb5-9ad3-bc94366fa418/files/11e8e724-0785-43db-84c7-662e70f6e9ce.jpg",
-      popular: false
+      name: "Салат Винегрет",
+      ingredients: "Свекла, картофель, морковь, огурцы, горошек, масло",
+      price: 3000
     },
     {
       id: 4,
-      name: "Царская острая",
-      description: "Острая курица, халапеньо, жгучий соус",
-      price: 340,
-      image: "https://cdn.poehali.dev/projects/e90906d7-b9fe-4eb5-9ad3-bc94366fa418/files/4de4d6a6-0ff8-4bba-9bba-08566d7b728c.jpg",
-      popular: false
+      name: "Салат Греческий",
+      ingredients: "Помидоры, огурцы, фета, маслины, лук, масло оливковое",
+      price: 3000
+    },
+    {
+      id: 5,
+      name: "Салат Витаминный",
+      ingredients: "Капуста, морковь, яблоко, зелень, масло",
+      price: 3000
+    },
+    {
+      id: 6,
+      name: "Салат с курицей",
+      ingredients: "Курица, помидоры, огурцы, сыр, майонез",
+      price: 3000
+    },
+    {
+      id: 7,
+      name: "Салат Овощной",
+      ingredients: "Помидоры, огурцы, лук, зелень, масло",
+      price: 3000
+    },
+    {
+      id: 8,
+      name: "Салат из помидоров",
+      ingredients: "Помидоры, лук, зелень, чеснок, масло",
+      price: 3000
+    },
+    {
+      id: 9,
+      name: "Салат с курицей и ананасами",
+      ingredients: "Курица, ананасы, кукуруза, яйцо, майонез",
+      price: 3000
+    },
+    {
+      id: 10,
+      name: "Салат Сельдь под шубой",
+      ingredients: "Сельдь, картофель, морковь, свекла, яйцо, майонез",
+      price: 3000
+    },
+    {
+      id: 11,
+      name: "Салат Крабовый",
+      ingredients: "Крабовые палочки, кукуруза, яйцо, рис, майонез",
+      price: 3000
+    },
+    {
+      id: 12,
+      name: "Салат Цезарь",
+      ingredients: "Курица, салат айсберг, помидоры черри, сухарики, пармезан, соус цезарь",
+      price: 3000
+    },
+    {
+      id: 13,
+      name: "Салат Оливье с ветчиной",
+      ingredients: "Ветчина, картофель, морковь, огурцы, горошек, яйцо, майонез",
+      price: 3000
+    },
+    {
+      id: 14,
+      name: "Салат с сыром",
+      ingredients: "Сыр, помидоры, огурцы, яйцо, чеснок, майонез",
+      price: 3000
+    },
+    {
+      id: 15,
+      name: "Салат Свекла с сыром",
+      ingredients: "Свекла, сыр, чеснок, грецкий орех, майонез",
+      price: 3000
+    },
+    {
+      id: 16,
+      name: "Салат Конструктор",
+      ingredients: "Курица, ветчина, сыр, яйцо, помидоры, огурцы, майонез",
+      price: 3000
+    },
+    {
+      id: 17,
+      name: "Салат Оливье",
+      ingredients: "Колбаса, картофель, морковь, огурцы, горошек, яйцо, майонез",
+      price: 3000
+    },
+    {
+      id: 18,
+      name: "Салат Морковь по-корейски",
+      ingredients: "Морковь, чеснок, уксус, специи корейские, масло",
+      price: 3000
+    },
+    {
+      id: 19,
+      name: "Салат Баклажаны по-корейски",
+      ingredients: "Баклажаны, перец болгарский, чеснок, специи корейские, масло",
+      price: 3000
+    },
+    {
+      id: 20,
+      name: "Салат Кимчи",
+      ingredients: "Пекинская капуста, перец чили, чеснок, имбирь, специи корейские",
+      price: 3000
+    },
+    {
+      id: 21,
+      name: "Салат Фунчоза",
+      ingredients: "Лапша фунчоза, морковь, огурцы, перец, соус соевый, специи",
+      price: 3000
+    },
+    {
+      id: 22,
+      name: "Салат Спаржа по-корейски",
+      ingredients: "Спаржа соевая, морковь, лук, чеснок, специи корейские, масло",
+      price: 3000
+    },
+    {
+      id: 23,
+      name: "Салат Папоротник по-корейски",
+      ingredients: "Папоротник, морковь, лук, чеснок, специи корейские, соус соевый",
+      price: 3000
+    },
+    {
+      id: 24,
+      name: "Салат Дайкон по-корейски",
+      ingredients: "Дайкон, морковь, чеснок, специи корейские, масло, уксус",
+      price: 3000
     }
   ];
 
@@ -63,10 +184,10 @@ export default function Index() {
             <h1 className="text-2xl font-bold text-primary">Царская Шаурма</h1>
           </div>
           <nav className="hidden md:flex gap-6">
-            <a href="#menu" className="text-sm font-medium hover:text-primary transition-colors">Меню</a>
+            <a href="#meat" className="text-sm font-medium hover:text-primary transition-colors">Мясо</a>
+            <a href="#salads" className="text-sm font-medium hover:text-primary transition-colors">Салаты</a>
+            <a href="#order" className="text-sm font-medium hover:text-primary transition-colors">Как заказать</a>
             <a href="#promos" className="text-sm font-medium hover:text-primary transition-colors">Акции</a>
-            <a href="#about" className="text-sm font-medium hover:text-primary transition-colors">О нас</a>
-            <a href="#delivery" className="text-sm font-medium hover:text-primary transition-colors">Доставка</a>
             <a href="#contacts" className="text-sm font-medium hover:text-primary transition-colors">Контакты</a>
           </nav>
           <Button size="lg" className="bg-secondary hover:bg-secondary/90">
@@ -99,35 +220,47 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="menu" className="py-20 bg-muted/30">
+      <section id="meat" className="py-20 bg-muted/30">
         <div className="container">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-accent">
-            Наше меню
+            Выберите мясо для шаурмы
           </h2>
           <p className="text-center text-muted-foreground mb-12 text-lg">
-            Выбирайте из нашей коллекции царских блюд
+            Все виды шаурмы по 3000₽
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {menuItems.map((item) => (
-              <Card key={item.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2">
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                  />
-                  {item.popular && (
-                    <Badge className="absolute top-3 right-3 bg-secondary text-white">
-                      Хит продаж
-                    </Badge>
-                  )}
-                </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {meatTypes.map((meat) => (
+              <Card key={meat.id} className="text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border-2 hover:border-primary">
                 <CardHeader>
-                  <CardTitle className="text-xl">{item.name}</CardTitle>
-                  <CardDescription className="text-base">{item.description}</CardDescription>
+                  <div className="text-6xl mb-4">{meat.icon}</div>
+                  <CardTitle className="text-lg">{meat.name}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-2xl font-bold text-primary">3000₽</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="salads" className="py-20">
+        <div className="container">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-accent">
+            Салаты к шаурме
+          </h2>
+          <p className="text-center text-muted-foreground mb-12 text-lg">
+            Все салаты по 3000₽
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {salads.map((salad) => (
+              <Card key={salad.id} className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2">
+                <CardHeader>
+                  <CardTitle className="text-lg">{salad.name}</CardTitle>
+                  <CardDescription className="text-sm leading-relaxed">{salad.ingredients}</CardDescription>
                 </CardHeader>
                 <CardFooter className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-primary">{item.price}₽</span>
+                  <span className="text-2xl font-bold text-primary">{salad.price}₽</span>
                   <Button className="bg-primary hover:bg-primary/90">
                     <Icon name="Plus" className="h-4 w-4" />
                   </Button>
@@ -135,6 +268,71 @@ export default function Index() {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section id="order" className="py-20 bg-muted/30">
+        <div className="container max-w-4xl">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-accent">
+            Как заказать
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="text-center hover:shadow-lg transition-all border-2">
+              <CardHeader>
+                <div className="mx-auto w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <Icon name="Phone" className="h-10 w-10 text-primary" />
+                </div>
+                <CardTitle className="text-xl">Шаг 1</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-lg">Позвоните по номеру<br /><span className="font-bold text-primary">+7 (999) 123-45-67</span></p>
+              </CardContent>
+            </Card>
+            <Card className="text-center hover:shadow-lg transition-all border-2">
+              <CardHeader>
+                <div className="mx-auto w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <Icon name="ChefHat" className="h-10 w-10 text-primary" />
+                </div>
+                <CardTitle className="text-xl">Шаг 2</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-lg">Выберите вид мяса и салат из нашего меню</p>
+              </CardContent>
+            </Card>
+            <Card className="text-center hover:shadow-lg transition-all border-2">
+              <CardHeader>
+                <div className="mx-auto w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <Icon name="Truck" className="h-10 w-10 text-primary" />
+                </div>
+                <CardTitle className="text-xl">Шаг 3</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-lg">Ждите доставку в течение 30-45 минут</p>
+              </CardContent>
+            </Card>
+          </div>
+          <Card className="mt-12 border-4 border-secondary bg-gradient-to-br from-primary/5 to-secondary/5">
+            <CardHeader>
+              <CardTitle className="text-2xl text-center flex items-center justify-center gap-2">
+                <Icon name="Info" className="h-6 w-6 text-primary" />
+                Важная информация
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3 text-lg">
+              <div className="flex items-start gap-3">
+                <Icon name="Check" className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                <p>При заказе обязательно укажите адрес доставки и контактный телефон</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <Icon name="Check" className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                <p>Можно заказать любое сочетание мяса и салата по вашему вкусу</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <Icon name="Check" className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                <p>Минимальная сумма заказа для бесплатной доставки — 800₽</p>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
