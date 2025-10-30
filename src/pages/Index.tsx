@@ -246,12 +246,12 @@ export default function Index() {
           <p className="text-center text-muted-foreground mb-12 text-lg">
             Любой вид мяса на ваш выбор
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             {meatTypes.map((meat) => (
-              <Card key={meat.id} className="text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border-2 hover:border-primary">
-                <CardHeader>
-                  <div className="text-6xl mb-4">{meat.icon}</div>
-                  <CardTitle className="text-lg">{meat.name}</CardTitle>
+              <Card key={meat.id} className="text-center hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 hover:scale-105 cursor-pointer border-4 hover:border-primary bg-gradient-to-br from-white to-primary/5">
+                <CardHeader className="p-8">
+                  <div className="text-8xl mb-6 animate-scale-in">{meat.icon}</div>
+                  <CardTitle className="text-2xl font-bold">{meat.name}</CardTitle>
                 </CardHeader>
               </Card>
             ))}
@@ -267,12 +267,12 @@ export default function Index() {
           <p className="text-center text-muted-foreground mb-12 text-lg">
             Свежие салаты на любой вкус
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {salads.map((salad) => (
-              <Card key={salad.id} className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2">
-                <CardHeader>
-                  <CardTitle className="text-lg">{salad.name}</CardTitle>
-                  <CardDescription className="text-sm leading-relaxed">{salad.ingredients}</CardDescription>
+              <Card key={salad.id} className="hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 hover:scale-105 cursor-pointer border-4 hover:border-secondary bg-gradient-to-br from-white to-secondary/5">
+                <CardHeader className="p-6">
+                  <CardTitle className="text-2xl font-bold mb-3">{salad.name}</CardTitle>
+                  <CardDescription className="text-base leading-relaxed">{salad.ingredients}</CardDescription>
                 </CardHeader>
               </Card>
             ))}
