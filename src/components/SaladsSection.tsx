@@ -206,7 +206,7 @@ export default function SaladsSection() {
                 <CardDescription>{salad.ingredients}</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-2xl font-bold text-primary">{salad.price} сум</p>
+                <p className="text-2xl font-bold text-primary">{salad.price} ₽</p>
               </CardContent>
             </Card>
           ))}
