@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Icon from "@/components/ui/icon";
 
 export default function Index() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const meatTypes = [
     { id: 1, name: "Курятина", icon: "🐔" },
     { id: 2, name: "Говядина", icon: "🐄" },
@@ -221,10 +224,83 @@ export default function Index() {
             <a href="#promos" className="text-sm font-medium hover:text-primary transition-colors">Акции</a>
             <a href="#contacts" className="text-sm font-medium hover:text-primary transition-colors">Контакты</a>
           </nav>
-          <Button size="lg" className="bg-secondary hover:bg-secondary/90">
-            <Icon name="Phone" className="mr-2 h-4 w-4" />
-            Заказать
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button size="lg" className="hidden sm:flex bg-secondary hover:bg-secondary/90">
+              <Icon name="Phone" className="mr-2 h-4 w-4" />
+              Заказать
+            </Button>
+            <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="outline" size="icon" className="md:hidden">
+                  <Icon name="Menu" className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                <nav className="flex flex-col gap-6 mt-8">
+                  <a 
+                    href="#meat" 
+                    className="text-lg font-medium hover:text-primary transition-colors flex items-center gap-3"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Icon name="Beef" className="h-5 w-5" />
+                    Мясо
+                  </a>
+                  <a 
+                    href="#salads" 
+                    className="text-lg font-medium hover:text-primary transition-colors flex items-center gap-3"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Icon name="Salad" className="h-5 w-5" />
+                    Салаты
+                  </a>
+                  <a 
+                    href="#order" 
+                    className="text-lg font-medium hover:text-primary transition-colors flex items-center gap-3"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Icon name="ClipboardList" className="h-5 w-5" />
+                    Как заказать
+                  </a>
+                  <a 
+                    href="#about" 
+                    className="text-lg font-medium hover:text-primary transition-colors flex items-center gap-3"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Icon name="BookOpen" className="h-5 w-5" />
+                    Наша история
+                  </a>
+                  <a 
+                    href="#reviews" 
+                    className="text-lg font-medium hover:text-primary transition-colors flex items-center gap-3"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Icon name="Star" className="h-5 w-5" />
+                    Отзывы
+                  </a>
+                  <a 
+                    href="#promos" 
+                    className="text-lg font-medium hover:text-primary transition-colors flex items-center gap-3"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Icon name="Gift" className="h-5 w-5" />
+                    Акции
+                  </a>
+                  <a 
+                    href="#contacts" 
+                    className="text-lg font-medium hover:text-primary transition-colors flex items-center gap-3"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Icon name="MapPin" className="h-5 w-5" />
+                    Контакты
+                  </a>
+                  <Button size="lg" className="mt-6 bg-secondary hover:bg-secondary/90 w-full">
+                    <Icon name="Phone" className="mr-2 h-4 w-4" />
+                    Заказать
+                  </Button>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </header>
 
@@ -270,7 +346,7 @@ export default function Index() {
       </section>
 
       <section id="meat" className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://cdn.poehali.dev/projects/e90906d7-b9fe-4eb5-9ad3-bc94366fa418/files/729e5d98-a5b5-4ae4-9c43-3ced24cba4ef.jpg')] bg-cover bg-center opacity-10" />
+        <div className="absolute inset-0 bg-[url('https://cdn.poehali.dev/projects/e90906d7-b9fe-4eb5-9ad3-bc94366fa418/files/729e5d98-a5b5-4ae4-9c43-3ced24cba4ef.jpg')] bg-cover bg-center opacity-25" />
         <div className="container relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-accent">
             Выберите мясо для шаурмы
@@ -292,7 +368,7 @@ export default function Index() {
       </section>
 
       <section id="salads" className="py-20 relative overflow-hidden bg-muted/30">
-        <div className="absolute inset-0 bg-[url('https://cdn.poehali.dev/projects/e90906d7-b9fe-4eb5-9ad3-bc94366fa418/files/11e8e724-0785-43db-84c7-662e70f6e9ce.jpg')] bg-cover bg-center opacity-10" />
+        <div className="absolute inset-0 bg-[url('https://cdn.poehali.dev/projects/e90906d7-b9fe-4eb5-9ad3-bc94366fa418/files/11e8e724-0785-43db-84c7-662e70f6e9ce.jpg')] bg-cover bg-center opacity-25" />
         <div className="container relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-accent">
             Салаты к шаурме
