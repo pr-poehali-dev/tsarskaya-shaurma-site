@@ -207,7 +207,25 @@ export default function Index() {
           <p className="text-xl md:text-2xl mb-8 text-foreground/80 max-w-2xl mx-auto">
             Только свежие ингредиенты и проверенные рецепты
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          
+          <Card className="max-w-2xl mx-auto border-4 border-primary shadow-2xl overflow-hidden">
+            <div className="relative h-64">
+              <img
+                src="https://cdn.poehali.dev/projects/e90906d7-b9fe-4eb5-9ad3-bc94366fa418/files/4de4d6a6-0ff8-4bba-9bba-08566d7b728c.jpg"
+                alt="Царская шаурма"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <h3 className="text-3xl md:text-4xl font-bold mb-2">Царская Шаурма</h3>
+                <div className="flex items-center justify-center gap-3">
+                  <span className="text-5xl md:text-6xl font-bold text-primary">3000₽</span>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
             <Button size="lg" className="text-lg px-8 py-6 bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all">
               <Icon name="ShoppingCart" className="mr-2 h-5 w-5" />
               Заказать сейчас
@@ -226,7 +244,7 @@ export default function Index() {
             Выберите мясо для шаурмы
           </h2>
           <p className="text-center text-muted-foreground mb-12 text-lg">
-            Все виды шаурмы по 3000₽
+            Любой вид мяса на ваш выбор
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {meatTypes.map((meat) => (
@@ -235,9 +253,6 @@ export default function Index() {
                   <div className="text-6xl mb-4">{meat.icon}</div>
                   <CardTitle className="text-lg">{meat.name}</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-2xl font-bold text-primary">3000₽</p>
-                </CardContent>
               </Card>
             ))}
           </div>
@@ -250,7 +265,7 @@ export default function Index() {
             Салаты к шаурме
           </h2>
           <p className="text-center text-muted-foreground mb-12 text-lg">
-            Все салаты по 3000₽
+            Свежие салаты на любой вкус
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {salads.map((salad) => (
@@ -259,12 +274,6 @@ export default function Index() {
                   <CardTitle className="text-lg">{salad.name}</CardTitle>
                   <CardDescription className="text-sm leading-relaxed">{salad.ingredients}</CardDescription>
                 </CardHeader>
-                <CardFooter className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-primary">{salad.price}₽</span>
-                  <Button className="bg-primary hover:bg-primary/90">
-                    <Icon name="Plus" className="h-4 w-4" />
-                  </Button>
-                </CardFooter>
               </Card>
             ))}
           </div>
