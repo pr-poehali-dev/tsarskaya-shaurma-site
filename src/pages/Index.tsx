@@ -175,6 +175,37 @@ export default function Index() {
     }
   ];
 
+  const reviews = [
+    {
+      id: 1,
+      name: "Александр М.",
+      rating: 5,
+      text: "Лучшая шаурма в городе! Огромные порции, свежие ингредиенты. Особенно нравится с говядиной и салатом по-корейски.",
+      date: "15.10.2024"
+    },
+    {
+      id: 2,
+      name: "Мария К.",
+      rating: 5,
+      text: "Заказываю уже третий раз. Доставка всегда вовремя, шаурма горячая и вкусная. Салат Цезарь просто бомба!",
+      date: "12.10.2024"
+    },
+    {
+      id: 3,
+      name: "Дмитрий П.",
+      rating: 5,
+      text: "Царское качество по царской цене! Попробовал с бараниной — восторг! Рекомендую всем друзьям.",
+      date: "08.10.2024"
+    },
+    {
+      id: 4,
+      name: "Елена С.",
+      rating: 5,
+      text: "Очень вкусно и сытно! Салаты свежие, мясо сочное. Особенно понравился винегрет — как у бабушки!",
+      date: "05.10.2024"
+    }
+  ];
+
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -238,8 +269,9 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="meat" className="py-20 bg-muted/30">
-        <div className="container">
+      <section id="meat" className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://cdn.poehali.dev/projects/e90906d7-b9fe-4eb5-9ad3-bc94366fa418/files/729e5d98-a5b5-4ae4-9c43-3ced24cba4ef.jpg')] bg-cover bg-center opacity-10" />
+        <div className="container relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-accent">
             Выберите мясо для шаурмы
           </h2>
@@ -259,8 +291,9 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="salads" className="py-20">
-        <div className="container">
+      <section id="salads" className="py-20 relative overflow-hidden bg-muted/30">
+        <div className="absolute inset-0 bg-[url('https://cdn.poehali.dev/projects/e90906d7-b9fe-4eb5-9ad3-bc94366fa418/files/11e8e724-0785-43db-84c7-662e70f6e9ce.jpg')] bg-cover bg-center opacity-10" />
+        <div className="container relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-accent">
             Салаты к шаурме
           </h2>
@@ -342,6 +375,74 @@ export default function Index() {
               </div>
             </CardContent>
           </Card>
+        </div>
+      </section>
+
+      <section id="about" className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10" />
+        <div className="container relative z-10 max-w-4xl">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-accent">
+            Наша история
+          </h2>
+          <Card className="border-4 border-primary/20 bg-white/95">
+            <CardContent className="p-8 space-y-6 text-lg leading-relaxed">
+              <p>
+                <span className="text-3xl float-left mr-4 text-primary font-bold">В</span>
+                <strong>2020 году</strong> мы открыли первую точку «Царской Шаурмы» с простой идеей — готовить шаурму так, как будто это блюдо для королевской семьи. Только отборное мясо, свежайшие овощи и авторские соусы по семейным рецептам.
+              </p>
+              <p>
+                За эти годы мы завоевали сердца тысяч гостей. Наш секрет прост: мы не экономим на качестве и готовим каждую шаурму с душой. Мясо маринуется по особой технологии 24 часа, овощи доставляются каждое утро с местных ферм, а лаваш выпекается прямо у нас.
+              </p>
+              <p>
+                <strong>«Царская Шаурма»</strong> — это не просто фастфуд. Это место, куда возвращаются снова и снова, где помнят постоянных гостей и их любимые сочетания. Мы гордимся тем, что стали частью вашей жизни — будь то быстрый обед в офисе или семейный ужин дома.
+              </p>
+              <div className="flex items-center justify-center gap-8 pt-4">
+                <div className="text-center">
+                  <p className="text-4xl font-bold text-primary">5000+</p>
+                  <p className="text-muted-foreground">Довольных гостей</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-4xl font-bold text-primary">4 года</p>
+                  <p className="text-muted-foreground">На рынке</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-4xl font-bold text-primary">100%</p>
+                  <p className="text-muted-foreground">Качество</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      <section id="reviews" className="py-20 bg-muted/30">
+        <div className="container">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-accent">
+            Отзывы наших гостей
+          </h2>
+          <p className="text-center text-muted-foreground mb-12 text-lg">
+            Нам доверяют тысячи людей
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {reviews.map((review) => (
+              <Card key={review.id} className="border-2 hover:shadow-xl transition-all">
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-2">
+                    <CardTitle className="text-xl">{review.name}</CardTitle>
+                    <div className="flex gap-1">
+                      {[...Array(review.rating)].map((_, i) => (
+                        <Icon key={i} name="Star" className="h-5 w-5 text-primary fill-primary" />
+                      ))}
+                    </div>
+                  </div>
+                  <CardDescription className="text-sm text-muted-foreground">{review.date}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-base leading-relaxed">{review.text}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -513,6 +614,23 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      <a
+        href="https://wa.me/79991234567"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-[#25D366] hover:bg-[#20BA5A] rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 animate-pulse"
+        aria-label="Заказать через WhatsApp"
+      >
+        <svg
+          className="w-10 h-10 text-white"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+        </svg>
+      </a>
 
       <footer className="py-12 bg-accent text-accent-foreground">
         <div className="container text-center">
