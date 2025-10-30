@@ -1,6 +1,34 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { useEffect, useRef, useState } from "react";
 
 export default function MeatSection() {
+  const [visibleItems, setVisibleItems] = useState<number[]>([]);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = parseInt(entry.target.getAttribute('data-id') || '0');
+            setVisibleItems((prev) => [...prev, id]);
+            observerRef.current?.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    return () => observerRef.current?.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const cards = document.querySelectorAll('[data-animate="meat"]');
+    cards.forEach((card) => {
+      observerRef.current?.observe(card);
+    });
+  }, []);
+
   const meatTypes = [
     { id: 1, name: "Курятина", icon: "🐔" },
     { id: 2, name: "Говядина", icon: "🐄" },
@@ -23,10 +51,17 @@ export default function MeatSection() {
           </p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {meatTypes.map((meat) => (
+          {meatTypes.map((meat, index) => (
             <Card 
-              key={meat.id} 
-              className="hover:scale-105 transition-transform cursor-pointer border-2 hover:border-primary animate-fade-in"
+              key={meat.id}
+              data-id={meat.id}
+              data-animate="meat"
+              className={`hover:scale-105 transition-all duration-500 cursor-pointer border-2 hover:border-primary ${
+                visibleItems.includes(meat.id)
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
             >
               <CardHeader className="text-center">
                 <div className="text-6xl mb-2">{meat.icon}</div>

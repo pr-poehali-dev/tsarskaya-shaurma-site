@@ -5,7 +5,6 @@ import SaladsSection from "@/components/SaladsSection";
 import OrderSection from "@/components/OrderSection";
 import AboutSection from "@/components/AboutSection";
 import ReviewsSection from "@/components/ReviewsSection";
-import PromosSection from "@/components/PromosSection";
 import ContactsSection from "@/components/ContactsSection";
 
 export default function Index() {
@@ -18,7 +17,6 @@ export default function Index() {
       <OrderSection />
       <AboutSection />
       <ReviewsSection />
-      <PromosSection />
       <ContactsSection />
     </div>
   );

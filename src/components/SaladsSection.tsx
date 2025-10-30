@@ -1,8 +1,34 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import Icon from "@/components/ui/icon";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useEffect, useRef, useState } from "react";
 
 export default function SaladsSection() {
+  const [visibleItems, setVisibleItems] = useState<number[]>([]);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = parseInt(entry.target.getAttribute('data-id') || '0');
+            setVisibleItems((prev) => [...prev, id]);
+            observerRef.current?.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    return () => observerRef.current?.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const cards = document.querySelectorAll('[data-animate="salad"]');
+    cards.forEach((card) => {
+      observerRef.current?.observe(card);
+    });
+  }, []);
+
   const salads = [
     {
       id: 1,
@@ -163,8 +189,18 @@ export default function SaladsSection() {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {salads.map((salad) => (
-            <Card key={salad.id} className="hover:shadow-xl transition-shadow animate-fade-in">
+          {salads.map((salad, index) => (
+            <Card 
+              key={salad.id} 
+              data-id={salad.id}
+              data-animate="salad"
+              className={`hover:shadow-xl transition-all duration-500 ${
+                visibleItems.includes(salad.id)
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: `${(index % 4) * 100}ms` }}
+            >
               <CardHeader>
                 <CardTitle className="text-lg">{salad.name}</CardTitle>
                 <CardDescription>{salad.ingredients}</CardDescription>
@@ -172,12 +208,6 @@ export default function SaladsSection() {
               <CardContent>
                 <p className="text-2xl font-bold text-primary">{salad.price} сум</p>
               </CardContent>
-              <CardFooter>
-                <Button className="w-full bg-secondary hover:bg-secondary/90">
-                  <Icon name="Plus" className="mr-2 h-4 w-4" />
-                  Добавить
-                </Button>
-              </CardFooter>
             </Card>
           ))}
         </div>

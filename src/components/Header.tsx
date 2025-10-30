@@ -17,7 +17,6 @@ export default function Header() {
           <a href="#meat" className="text-sm font-medium hover:text-primary transition-colors">Мясо</a>
           <a href="#salads" className="text-sm font-medium hover:text-primary transition-colors">Салаты</a>
           <a href="#order" className="text-sm font-medium hover:text-primary transition-colors">Как заказать</a>
-          <a href="#promos" className="text-sm font-medium hover:text-primary transition-colors">Акции</a>
           <a href="#contacts" className="text-sm font-medium hover:text-primary transition-colors">Контакты</a>
         </nav>
         <div className="flex items-center gap-3">
@@ -72,14 +71,6 @@ export default function Header() {
                 >
                   <Icon name="Star" className="h-5 w-5" />
                   Отзывы
-                </a>
-                <a 
-                  href="#promos" 
-                  className="text-lg font-medium hover:text-primary transition-colors flex items-center gap-3"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <Icon name="Gift" className="h-5 w-5" />
-                  Акции
                 </a>
                 <a 
                   href="#contacts" 
