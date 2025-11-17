@@ -1,19 +1,17 @@
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Catalog from "@/components/Catalog";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import { useState } from "react";
+import ChatSidebar from "@/components/ChatSidebar";
+import ChatWindow from "@/components/ChatWindow";
 
 export default function Index() {
+  const [selectedChatId, setSelectedChatId] = useState<string>();
+
   return (
-    <div className="min-h-screen">
-      <Header />
-      <Hero />
-      <About />
-      <Catalog />
-      <Contact />
-      <Footer />
+    <div className="h-screen w-screen flex overflow-hidden bg-background">
+      <ChatSidebar
+        onSelectChat={setSelectedChatId}
+        selectedChatId={selectedChatId}
+      />
+      <ChatWindow chatId={selectedChatId} />
     </div>
   );
 }
