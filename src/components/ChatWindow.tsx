@@ -14,6 +14,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   const [showReactions, setShowReactions] = useState<string | null>(null);
   const [showMenu, setShowMenu] = useState<string | null>(null);
   const [replyingTo, setReplyingTo] = useState<Message | null>(null);
+  const [capsLockEnabled, setCapsLockEnabled] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const reactions = ["👍", "❤️", "😂", "😮", "😢", "🔥"];
@@ -230,13 +231,17 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         message={message}
         isRecording={isRecording}
         replyingTo={replyingTo}
+        capsLockEnabled={capsLockEnabled}
         fileInputRef={fileInputRef}
-        onMessageChange={setMessage}
+        onMessageChange={(value) => {
+          setMessage(capsLockEnabled ? value.toUpperCase() : value);
+        }}
         onSend={handleSend}
         onFileUpload={handleFileUpload}
         onVoiceRecord={handleVoiceRecord}
         onKeyPress={handleKeyPress}
         onCancelReply={() => setReplyingTo(null)}
+        onToggleCapsLock={() => setCapsLockEnabled(!capsLockEnabled)}
       />
     </div>
   );

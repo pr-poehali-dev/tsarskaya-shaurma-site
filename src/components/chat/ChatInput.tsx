@@ -8,6 +8,7 @@ interface ChatInputProps {
   message: string;
   isRecording: boolean;
   replyingTo: Message | null;
+  capsLockEnabled: boolean;
   fileInputRef: React.RefObject<HTMLInputElement>;
   onMessageChange: (value: string) => void;
   onSend: () => void;
@@ -15,12 +16,14 @@ interface ChatInputProps {
   onVoiceRecord: () => void;
   onKeyPress: (e: React.KeyboardEvent) => void;
   onCancelReply: () => void;
+  onToggleCapsLock: () => void;
 }
 
 export default function ChatInput({
   message,
   isRecording,
   replyingTo,
+  capsLockEnabled,
   fileInputRef,
   onMessageChange,
   onSend,
@@ -28,6 +31,7 @@ export default function ChatInput({
   onVoiceRecord,
   onKeyPress,
   onCancelReply,
+  onToggleCapsLock,
 }: ChatInputProps) {
   return (
     <div className="border-t p-4">
@@ -64,6 +68,15 @@ export default function ChatInput({
           onClick={() => fileInputRef.current?.click()}
         >
           <Icon name="Paperclip" size={20} />
+        </Button>
+        <Button
+          size="icon"
+          variant="ghost"
+          onClick={onToggleCapsLock}
+          className={cn(capsLockEnabled && "bg-primary/10 text-primary")}
+          title="Прописные буквы"
+        >
+          <Icon name="CaseSensitive" size={20} />
         </Button>
         <div className="flex-1 relative">
           <Input
