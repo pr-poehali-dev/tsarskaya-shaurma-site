@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -8,10 +8,14 @@ import { cn } from "@/lib/utils";
 
 interface Message {
   id: string;
-  text: string;
+  text?: string;
   time: string;
   isOwn: boolean;
   status?: "sent" | "delivered" | "read";
+  type: "text" | "voice" | "file";
+  fileName?: string;
+  fileSize?: string;
+  duration?: string;
 }
 
 interface ChatWindowProps {
@@ -20,12 +24,15 @@ interface ChatWindowProps {
 
 export default function ChatWindow({ chatId }: ChatWindowProps) {
   const [message, setMessage] = useState("");
+  const [isRecording, setIsRecording] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
       text: "Привет! Как дела?",
       time: "10:30",
       isOwn: false,
+      type: "text",
     },
     {
       id: "2",
@@ -33,12 +40,14 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       time: "10:31",
       isOwn: true,
       status: "read",
+      type: "text",
     },
     {
       id: "3",
       text: "Тоже хорошо! Слушай, хотела спросить про проект",
       time: "10:32",
       isOwn: false,
+      type: "text",
     },
     {
       id: "4",
@@ -46,6 +55,23 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       time: "10:33",
       isOwn: true,
       status: "read",
+      type: "text",
+    },
+    {
+      id: "5",
+      time: "10:35",
+      isOwn: false,
+      type: "voice",
+      duration: "0:23",
+    },
+    {
+      id: "6",
+      time: "10:36",
+      isOwn: true,
+      status: "read",
+      type: "file",
+      fileName: "Презентация.pdf",
+      fileSize: "2.4 МБ",
     },
   ]);
 
@@ -61,10 +87,52 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       }),
       isOwn: true,
       status: "sent",
+      type: "text",
     };
 
     setMessages([...messages, newMessage]);
     setMessage("");
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const newMessage: Message = {
+      id: Date.now().toString(),
+      time: new Date().toLocaleTimeString("ru-RU", {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+      isOwn: true,
+      status: "sent",
+      type: "file",
+      fileName: file.name,
+      fileSize: (file.size / 1024 / 1024).toFixed(1) + " МБ",
+    };
+
+    setMessages([...messages, newMessage]);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const handleVoiceRecord = () => {
+    if (isRecording) {
+      setIsRecording(false);
+      const newMessage: Message = {
+        id: Date.now().toString(),
+        time: new Date().toLocaleTimeString("ru-RU", {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+        isOwn: true,
+        status: "sent",
+        type: "voice",
+        duration: "0:" + Math.floor(Math.random() * 60).toString().padStart(2, "0"),
+      };
+      setMessages([...messages, newMessage]);
+    } else {
+      setIsRecording(true);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -132,7 +200,60 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
                     : "bg-muted"
                 )}
               >
-                <p className="break-words">{msg.text}</p>
+                {msg.type === "text" && <p className="break-words">{msg.text}</p>}
+                
+                {msg.type === "voice" && (
+                  <div className="flex items-center gap-3 min-w-[200px]">
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className={cn(
+                        "h-8 w-8 rounded-full",
+                        msg.isOwn
+                          ? "hover:bg-primary-foreground/20"
+                          : "hover:bg-foreground/10"
+                      )}
+                    >
+                      <Icon name="Play" size={16} />
+                    </Button>
+                    <div className="flex-1 flex items-center gap-2">
+                      <div className="flex-1 h-1 bg-foreground/20 rounded-full">
+                        <div className="h-full w-1/3 bg-foreground/40 rounded-full" />
+                      </div>
+                      <span className="text-xs">{msg.duration}</span>
+                    </div>
+                  </div>
+                )}
+                
+                {msg.type === "file" && (
+                  <div className="flex items-center gap-3 min-w-[250px]">
+                    <div
+                      className={cn(
+                        "p-2 rounded-lg",
+                        msg.isOwn ? "bg-primary-foreground/20" : "bg-foreground/10"
+                      )}
+                    >
+                      <Icon name="FileText" size={24} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium truncate">{msg.fileName}</p>
+                      <p className="text-xs opacity-70">{msg.fileSize}</p>
+                    </div>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className={cn(
+                        "h-8 w-8",
+                        msg.isOwn
+                          ? "hover:bg-primary-foreground/20"
+                          : "hover:bg-foreground/10"
+                      )}
+                    >
+                      <Icon name="Download" size={16} />
+                    </Button>
+                  </div>
+                )}
+                
                 <div
                   className={cn(
                     "flex items-center gap-1 mt-1 text-xs",
@@ -155,16 +276,27 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
 
       <div className="border-t p-4">
         <div className="flex items-end gap-2">
-          <Button size="icon" variant="ghost">
+          <input
+            ref={fileInputRef}
+            type="file"
+            className="hidden"
+            onChange={handleFileUpload}
+          />
+          <Button
+            size="icon"
+            variant="ghost"
+            onClick={() => fileInputRef.current?.click()}
+          >
             <Icon name="Paperclip" size={20} />
           </Button>
           <div className="flex-1 relative">
             <Input
-              placeholder="Введите сообщение..."
+              placeholder={isRecording ? "Идет запись..." : "Введите сообщение..."}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               onKeyPress={handleKeyPress}
               className="pr-12"
+              disabled={isRecording}
             />
             <Button
               size="icon"
@@ -174,9 +306,19 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
               <Icon name="Smile" size={20} />
             </Button>
           </div>
-          <Button size="icon" onClick={handleSend}>
-            <Icon name="Send" size={20} />
-          </Button>
+          {message.trim() ? (
+            <Button size="icon" onClick={handleSend}>
+              <Icon name="Send" size={20} />
+            </Button>
+          ) : (
+            <Button
+              size="icon"
+              onClick={handleVoiceRecord}
+              className={cn(isRecording && "bg-destructive hover:bg-destructive/90")}
+            >
+              <Icon name={isRecording ? "Square" : "Mic"} size={20} />
+            </Button>
+          )}
         </div>
       </div>
     </div>
