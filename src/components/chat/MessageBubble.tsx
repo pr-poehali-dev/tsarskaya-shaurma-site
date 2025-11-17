@@ -19,6 +19,7 @@ export interface Message {
     text: string;
     sender: string;
   };
+  isEdited?: boolean;
 }
 
 interface MessageBubbleProps {
@@ -33,6 +34,7 @@ interface MessageBubbleProps {
   onCopy: (msg: Message) => void;
   onForward: (msg: Message) => void;
   onDelete: (messageId: string) => void;
+  onEdit: (msg: Message) => void;
 }
 
 export default function MessageBubble({
@@ -47,6 +49,7 @@ export default function MessageBubble({
   onCopy,
   onForward,
   onDelete,
+  onEdit,
 }: MessageBubbleProps) {
   return (
     <div
@@ -144,6 +147,7 @@ export default function MessageBubble({
             )}
           >
             <span>{msg.time}</span>
+            {msg.isEdited && <span className="opacity-70">· изменено</span>}
             {msg.isOwn && msg.status === "read" && (
               <Icon name="CheckCheck" size={14} />
             )}
@@ -205,6 +209,15 @@ export default function MessageBubble({
               <Icon name="Reply" size={16} />
               Ответить
             </button>
+            {msg.isOwn && msg.type === "text" && (
+              <button
+                onClick={() => onEdit(msg)}
+                className="w-full px-4 py-2 text-sm text-left hover:bg-muted flex items-center gap-2"
+              >
+                <Icon name="Edit" size={16} />
+                Редактировать
+              </button>
+            )}
             {msg.text && (
               <button
                 onClick={() => onCopy(msg)}

@@ -14,6 +14,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   const [showReactions, setShowReactions] = useState<string | null>(null);
   const [showMenu, setShowMenu] = useState<string | null>(null);
   const [replyingTo, setReplyingTo] = useState<Message | null>(null);
+  const [editingMessage, setEditingMessage] = useState<Message | null>(null);
   const [capsLockEnabled, setCapsLockEnabled] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -77,6 +78,19 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
 
   const handleSend = () => {
     if (!message.trim()) return;
+
+    if (editingMessage) {
+      setMessages(
+        messages.map((msg) =>
+          msg.id === editingMessage.id
+            ? { ...msg, text: message, isEdited: true }
+            : msg
+        )
+      );
+      setMessage("");
+      setEditingMessage(null);
+      return;
+    }
 
     const now = new Date();
     const newMessage: Message = {
@@ -188,6 +202,13 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
     setShowMenu(null);
   };
 
+  const handleEdit = (msg: Message) => {
+    setEditingMessage(msg);
+    setMessage(msg.text || "");
+    setShowMenu(null);
+    setReplyingTo(null);
+  };
+
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -226,11 +247,13 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         onCopy={handleCopy}
         onForward={handleForward}
         onDelete={handleDelete}
+        onEdit={handleEdit}
       />
       <ChatInput
         message={message}
         isRecording={isRecording}
         replyingTo={replyingTo}
+        editingMessage={editingMessage}
         capsLockEnabled={capsLockEnabled}
         fileInputRef={fileInputRef}
         onMessageChange={(value) => {
@@ -241,6 +264,10 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         onVoiceRecord={handleVoiceRecord}
         onKeyPress={handleKeyPress}
         onCancelReply={() => setReplyingTo(null)}
+        onCancelEdit={() => {
+          setEditingMessage(null);
+          setMessage("");
+        }}
         onToggleCapsLock={() => setCapsLockEnabled(!capsLockEnabled)}
       />
     </div>

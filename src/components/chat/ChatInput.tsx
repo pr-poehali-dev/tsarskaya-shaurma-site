@@ -8,6 +8,7 @@ interface ChatInputProps {
   message: string;
   isRecording: boolean;
   replyingTo: Message | null;
+  editingMessage: Message | null;
   capsLockEnabled: boolean;
   fileInputRef: React.RefObject<HTMLInputElement>;
   onMessageChange: (value: string) => void;
@@ -16,6 +17,7 @@ interface ChatInputProps {
   onVoiceRecord: () => void;
   onKeyPress: (e: React.KeyboardEvent) => void;
   onCancelReply: () => void;
+  onCancelEdit: () => void;
   onToggleCapsLock: () => void;
 }
 
@@ -23,6 +25,7 @@ export default function ChatInput({
   message,
   isRecording,
   replyingTo,
+  editingMessage,
   capsLockEnabled,
   fileInputRef,
   onMessageChange,
@@ -31,11 +34,32 @@ export default function ChatInput({
   onVoiceRecord,
   onKeyPress,
   onCancelReply,
+  onCancelEdit,
   onToggleCapsLock,
 }: ChatInputProps) {
   return (
     <div className="border-t p-4">
-      {replyingTo && (
+      {editingMessage && (
+        <div className="mb-2 p-3 bg-blue-50 dark:bg-blue-950 rounded-lg flex items-start justify-between">
+          <div className="flex-1">
+            <div className="text-xs font-semibold text-blue-600 dark:text-blue-400 mb-1">
+              Редактирование сообщения
+            </div>
+            <div className="text-sm truncate">
+              {editingMessage.text}
+            </div>
+          </div>
+          <Button
+            size="icon"
+            variant="ghost"
+            className="h-6 w-6"
+            onClick={onCancelEdit}
+          >
+            <Icon name="X" size={16} />
+          </Button>
+        </div>
+      )}
+      {replyingTo && !editingMessage && (
         <div className="mb-2 p-3 bg-muted rounded-lg flex items-start justify-between">
           <div className="flex-1">
             <div className="text-xs font-semibold text-primary mb-1">
@@ -80,7 +104,7 @@ export default function ChatInput({
         </Button>
         <div className="flex-1 relative">
           <Input
-            placeholder={isRecording ? "Идет запись..." : "Введите сообщение..."}
+            placeholder={isRecording ? "Идет запись..." : editingMessage ? "Редактировать сообщение..." : "Введите сообщение..."}
             value={message}
             onChange={(e) => onMessageChange(e.target.value)}
             onKeyPress={onKeyPress}

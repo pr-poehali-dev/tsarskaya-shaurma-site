@@ -13,6 +13,7 @@ interface ChatMessagesProps {
   onCopy: (msg: Message) => void;
   onForward: (msg: Message) => void;
   onDelete: (messageId: string) => void;
+  onEdit: (msg: Message) => void;
 }
 
 export default function ChatMessages({
@@ -27,6 +28,7 @@ export default function ChatMessages({
   onCopy,
   onForward,
   onDelete,
+  onEdit,
 }: ChatMessagesProps) {
   const getDateLabel = (date: string) => {
     const today = new Date().toISOString().split("T")[0];
@@ -70,6 +72,7 @@ export default function ChatMessages({
                   onCopy={onCopy}
                   onForward={onForward}
                   onDelete={onDelete}
+                  onEdit={onEdit}
                 />
               ))}
             </div>
