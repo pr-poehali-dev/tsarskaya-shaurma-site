@@ -22,6 +22,13 @@ export default function Index() {
     setSelectedChatId(undefined);
   };
 
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    if (tab === "chats") {
+      setShowChatList(true);
+    }
+  };
+
   const renderContent = () => {
     switch (activeTab) {
       case "chats":
@@ -63,7 +70,7 @@ export default function Index() {
       <div className="flex-1 flex overflow-hidden">
         {renderContent()}
       </div>
-      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+      <BottomNav activeTab={activeTab} onTabChange={handleTabChange} />
     </div>
   );
 }
