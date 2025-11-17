@@ -5,21 +5,46 @@ import GroupsTab from "@/components/GroupsTab";
 import FeedTab from "@/components/FeedTab";
 import ProfileTab from "@/components/ProfileTab";
 import BottomNav from "@/components/BottomNav";
+import { cn } from "@/lib/utils";
 
 export default function Index() {
   const [selectedChatId, setSelectedChatId] = useState<string>();
   const [activeTab, setActiveTab] = useState("chats");
+  const [showChatList, setShowChatList] = useState(true);
+
+  const handleSelectChat = (chatId: string) => {
+    setSelectedChatId(chatId);
+    setShowChatList(false);
+  };
+
+  const handleBackToList = () => {
+    setShowChatList(true);
+    setSelectedChatId(undefined);
+  };
 
   const renderContent = () => {
     switch (activeTab) {
       case "chats":
         return (
           <>
-            <ChatSidebar
-              onSelectChat={setSelectedChatId}
-              selectedChatId={selectedChatId}
-            />
-            <ChatWindow chatId={selectedChatId} />
+            <div className={cn(
+              "flex-1 md:w-80 md:flex-none",
+              showChatList ? "block" : "hidden md:block"
+            )}>
+              <ChatSidebar
+                onSelectChat={handleSelectChat}
+                selectedChatId={selectedChatId}
+              />
+            </div>
+            <div className={cn(
+              "flex-1",
+              showChatList ? "hidden md:flex" : "flex"
+            )}>
+              <ChatWindow 
+                chatId={selectedChatId} 
+                onBack={handleBackToList}
+              />
+            </div>
           </>
         );
       case "groups":

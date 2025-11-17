@@ -6,9 +6,10 @@ import { Message } from "./chat/MessageBubble";
 
 interface ChatWindowProps {
   chatId?: string;
+  onBack?: () => void;
 }
 
-export default function ChatWindow({ chatId }: ChatWindowProps) {
+export default function ChatWindow({ chatId, onBack }: ChatWindowProps) {
   const [message, setMessage] = useState("");
   const [isRecording, setIsRecording] = useState(false);
   const [showReactions, setShowReactions] = useState<string | null>(null);
@@ -234,7 +235,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
 
   return (
     <div className="flex-1 flex flex-col h-full">
-      <ChatHeader />
+      <ChatHeader onBack={onBack} />
       <ChatMessages
         messages={messages}
         showReactions={showReactions}

@@ -71,7 +71,7 @@ export default function ChatSidebar({ onSelectChat, selectedChatId }: ChatSideba
   );
 
   return (
-    <div className="w-80 border-r bg-background flex flex-col h-full">
+    <div className="w-full md:w-80 md:border-r bg-background flex flex-col h-full">
       <div className="p-4 border-b space-y-4">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold">Чаты</h1>
