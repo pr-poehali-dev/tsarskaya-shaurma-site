@@ -17,7 +17,11 @@ export default function ChatWindow({ chatId, onBack }: ChatWindowProps) {
   const [replyingTo, setReplyingTo] = useState<Message | null>(null);
   const [editingMessage, setEditingMessage] = useState<Message | null>(null);
   const [capsLockEnabled, setCapsLockEnabled] = useState(false);
+  const [playingVoice, setPlayingVoice] = useState<string | null>(null);
+  const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
+  const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const reactions = ["👍", "❤️", "😂", "😮", "😢", "🔥"];
   const [messages, setMessages] = useState<Message[]>([
@@ -142,25 +146,55 @@ export default function ChatWindow({ chatId, onBack }: ChatWindowProps) {
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
-  const handleVoiceRecord = () => {
+  const handleVoiceRecord = async () => {
     if (isRecording) {
+      if (mediaRecorder && mediaRecorder.state === "recording") {
+        mediaRecorder.stop();
+      }
       setIsRecording(false);
-      const now = new Date();
-      const newMessage: Message = {
-        id: Date.now().toString(),
-        time: now.toLocaleTimeString("ru-RU", {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-        date: now.toISOString().split("T")[0],
-        isOwn: true,
-        status: "sent",
-        type: "voice",
-        duration: "0:" + Math.floor(Math.random() * 60).toString().padStart(2, "0"),
-      };
-      setMessages([...messages, newMessage]);
     } else {
-      setIsRecording(true);
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const recorder = new MediaRecorder(stream);
+        const chunks: Blob[] = [];
+
+        recorder.ondataavailable = (e) => {
+          if (e.data.size > 0) {
+            chunks.push(e.data);
+          }
+        };
+
+        recorder.onstop = () => {
+          const audioBlob = new Blob(chunks, { type: "audio/webm" });
+          const audioUrl = URL.createObjectURL(audioBlob);
+          const duration = Math.floor(chunks.length / 10);
+
+          const now = new Date();
+          const newMessage: Message = {
+            id: Date.now().toString(),
+            time: now.toLocaleTimeString("ru-RU", {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+            date: now.toISOString().split("T")[0],
+            isOwn: true,
+            status: "sent",
+            type: "voice",
+            duration: "0:" + Math.max(1, duration).toString().padStart(2, "0"),
+            audioUrl,
+          };
+
+          setMessages([...messages, newMessage]);
+          stream.getTracks().forEach((track) => track.stop());
+        };
+
+        recorder.start();
+        setMediaRecorder(recorder);
+        setIsRecording(true);
+      } catch (error) {
+        console.error("Ошибка доступа к микрофону:", error);
+        alert("Не удалось получить доступ к микрофону. Проверьте разрешения.");
+      }
     }
   };
 
@@ -210,6 +244,26 @@ export default function ChatWindow({ chatId, onBack }: ChatWindowProps) {
     setReplyingTo(null);
   };
 
+  const handlePlayVoice = (messageId: string) => {
+    const msg = messages.find((m) => m.id === messageId);
+    if (!msg || !msg.audioUrl) return;
+
+    if (playingVoice === messageId) {
+      audioRef.current?.pause();
+      setPlayingVoice(null);
+    } else {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+
+      const audio = new Audio(msg.audioUrl);
+      audio.onended = () => setPlayingVoice(null);
+      audio.play();
+      audioRef.current = audio;
+      setPlayingVoice(messageId);
+    }
+  };
+
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -241,6 +295,7 @@ export default function ChatWindow({ chatId, onBack }: ChatWindowProps) {
         showReactions={showReactions}
         showMenu={showMenu}
         reactions={reactions}
+        playingVoice={playingVoice}
         onReactionToggle={(id) => setShowReactions(showReactions === id ? null : id)}
         onMenuToggle={(id) => setShowMenu(showMenu === id ? null : id)}
         onReaction={handleReaction}
@@ -249,6 +304,7 @@ export default function ChatWindow({ chatId, onBack }: ChatWindowProps) {
         onForward={handleForward}
         onDelete={handleDelete}
         onEdit={handleEdit}
+        onPlayVoice={handlePlayVoice}
       />
       <ChatInput
         message={message}

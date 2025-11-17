@@ -6,6 +6,7 @@ interface ChatMessagesProps {
   showReactions: string | null;
   showMenu: string | null;
   reactions: string[];
+  playingVoice: string | null;
   onReactionToggle: (messageId: string) => void;
   onMenuToggle: (messageId: string) => void;
   onReaction: (messageId: string, reaction: string) => void;
@@ -14,6 +15,7 @@ interface ChatMessagesProps {
   onForward: (msg: Message) => void;
   onDelete: (messageId: string) => void;
   onEdit: (msg: Message) => void;
+  onPlayVoice: (messageId: string) => void;
 }
 
 export default function ChatMessages({
@@ -21,6 +23,7 @@ export default function ChatMessages({
   showReactions,
   showMenu,
   reactions,
+  playingVoice,
   onReactionToggle,
   onMenuToggle,
   onReaction,
@@ -29,6 +32,7 @@ export default function ChatMessages({
   onForward,
   onDelete,
   onEdit,
+  onPlayVoice,
 }: ChatMessagesProps) {
   const getDateLabel = (date: string) => {
     const today = new Date().toISOString().split("T")[0];
@@ -65,6 +69,7 @@ export default function ChatMessages({
                   showReactions={showReactions}
                   showMenu={showMenu}
                   reactions={reactions}
+                  playingVoice={playingVoice}
                   onReactionToggle={onReactionToggle}
                   onMenuToggle={onMenuToggle}
                   onReaction={onReaction}
@@ -73,6 +78,7 @@ export default function ChatMessages({
                   onForward={onForward}
                   onDelete={onDelete}
                   onEdit={onEdit}
+                  onPlayVoice={onPlayVoice}
                 />
               ))}
             </div>

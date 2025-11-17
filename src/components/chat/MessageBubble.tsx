@@ -13,6 +13,7 @@ export interface Message {
   fileName?: string;
   fileSize?: string;
   duration?: string;
+  audioUrl?: string;
   reactions?: string[];
   replyTo?: {
     id: string;
@@ -27,6 +28,7 @@ interface MessageBubbleProps {
   showReactions: string | null;
   showMenu: string | null;
   reactions: string[];
+  playingVoice: string | null;
   onReactionToggle: (messageId: string) => void;
   onMenuToggle: (messageId: string) => void;
   onReaction: (messageId: string, reaction: string) => void;
@@ -35,6 +37,7 @@ interface MessageBubbleProps {
   onForward: (msg: Message) => void;
   onDelete: (messageId: string) => void;
   onEdit: (msg: Message) => void;
+  onPlayVoice: (messageId: string) => void;
 }
 
 export default function MessageBubble({
@@ -42,6 +45,7 @@ export default function MessageBubble({
   showReactions,
   showMenu,
   reactions,
+  playingVoice,
   onReactionToggle,
   onMenuToggle,
   onReaction,
@@ -50,6 +54,7 @@ export default function MessageBubble({
   onForward,
   onDelete,
   onEdit,
+  onPlayVoice,
 }: MessageBubbleProps) {
   return (
     <div
@@ -93,6 +98,10 @@ export default function MessageBubble({
               <Button
                 size="icon"
                 variant="ghost"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onPlayVoice(msg.id);
+                }}
                 className={cn(
                   "h-8 w-8 rounded-full",
                   msg.isOwn
@@ -100,7 +109,7 @@ export default function MessageBubble({
                     : "hover:bg-foreground/10"
                 )}
               >
-                <Icon name="Play" size={16} />
+                <Icon name={playingVoice === msg.id ? "Pause" : "Play"} size={16} />
               </Button>
               <div className="flex-1 flex items-center gap-2">
                 <div className="flex-1 h-1 bg-foreground/20 rounded-full">
