@@ -10,12 +10,14 @@ interface Message {
   id: string;
   text?: string;
   time: string;
+  date: string;
   isOwn: boolean;
   status?: "sent" | "delivered" | "read";
   type: "text" | "voice" | "file";
   fileName?: string;
   fileSize?: string;
   duration?: string;
+  reactions?: string[];
 }
 
 interface ChatWindowProps {
@@ -25,19 +27,25 @@ interface ChatWindowProps {
 export default function ChatWindow({ chatId }: ChatWindowProps) {
   const [message, setMessage] = useState("");
   const [isRecording, setIsRecording] = useState(false);
+  const [showReactions, setShowReactions] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const reactions = ["👍", "❤️", "😂", "😮", "😢", "🔥"];
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
       text: "Привет! Как дела?",
       time: "10:30",
+      date: "2024-11-15",
       isOwn: false,
       type: "text",
+      reactions: ["👍"],
     },
     {
       id: "2",
       text: "Привет! Всё отлично, спасибо! А у тебя?",
       time: "10:31",
+      date: "2024-11-15",
       isOwn: true,
       status: "read",
       type: "text",
@@ -46,6 +54,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       id: "3",
       text: "Тоже хорошо! Слушай, хотела спросить про проект",
       time: "10:32",
+      date: "2024-11-15",
       isOwn: false,
       type: "text",
     },
@@ -53,13 +62,16 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       id: "4",
       text: "Конечно, спрашивай!",
       time: "10:33",
+      date: "2024-11-16",
       isOwn: true,
       status: "read",
       type: "text",
+      reactions: ["❤️", "👍"],
     },
     {
       id: "5",
       time: "10:35",
+      date: "2024-11-16",
       isOwn: false,
       type: "voice",
       duration: "0:23",
@@ -67,6 +79,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
     {
       id: "6",
       time: "10:36",
+      date: "2024-11-17",
       isOwn: true,
       status: "read",
       type: "file",
@@ -78,13 +91,15 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   const handleSend = () => {
     if (!message.trim()) return;
 
+    const now = new Date();
     const newMessage: Message = {
       id: Date.now().toString(),
       text: message,
-      time: new Date().toLocaleTimeString("ru-RU", {
+      time: now.toLocaleTimeString("ru-RU", {
         hour: "2-digit",
         minute: "2-digit",
       }),
+      date: now.toISOString().split("T")[0],
       isOwn: true,
       status: "sent",
       type: "text",
@@ -98,12 +113,14 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    const now = new Date();
     const newMessage: Message = {
       id: Date.now().toString(),
-      time: new Date().toLocaleTimeString("ru-RU", {
+      time: now.toLocaleTimeString("ru-RU", {
         hour: "2-digit",
         minute: "2-digit",
       }),
+      date: now.toISOString().split("T")[0],
       isOwn: true,
       status: "sent",
       type: "file",
@@ -118,12 +135,14 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   const handleVoiceRecord = () => {
     if (isRecording) {
       setIsRecording(false);
+      const now = new Date();
       const newMessage: Message = {
         id: Date.now().toString(),
-        time: new Date().toLocaleTimeString("ru-RU", {
+        time: now.toLocaleTimeString("ru-RU", {
           hour: "2-digit",
           minute: "2-digit",
         }),
+        date: now.toISOString().split("T")[0],
         isOwn: true,
         status: "sent",
         type: "voice",
@@ -134,6 +153,40 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       setIsRecording(true);
     }
   };
+
+  const handleReaction = (messageId: string, reaction: string) => {
+    setMessages(
+      messages.map((msg) => {
+        if (msg.id === messageId) {
+          const reactions = msg.reactions || [];
+          if (reactions.includes(reaction)) {
+            return { ...msg, reactions: reactions.filter((r) => r !== reaction) };
+          } else {
+            return { ...msg, reactions: [...reactions, reaction] };
+          }
+        }
+        return msg;
+      })
+    );
+    setShowReactions(null);
+  };
+
+  const getDateLabel = (date: string) => {
+    const today = new Date().toISOString().split("T")[0];
+    const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
+
+    if (date === today) return "Сегодня";
+    if (date === yesterday) return "Вчера";
+
+    const d = new Date(date);
+    return d.toLocaleDateString("ru-RU", { day: "numeric", month: "long" });
+  };
+
+  const groupedMessages = messages.reduce((acc, msg) => {
+    if (!acc[msg.date]) acc[msg.date] = [];
+    acc[msg.date].push(msg);
+    return acc;
+  }, {} as Record<string, Message[]>);
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -186,20 +239,30 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       </div>
 
       <ScrollArea className="flex-1 p-4">
-        <div className="space-y-4">
-          {messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={cn("flex", msg.isOwn ? "justify-end" : "justify-start")}
-            >
-              <div
-                className={cn(
-                  "max-w-[70%] rounded-2xl px-4 py-2",
-                  msg.isOwn
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted"
-                )}
-              >
+        <div className="space-y-6">
+          {Object.keys(groupedMessages).map((date) => (
+            <div key={date}>
+              <div className="flex items-center justify-center mb-4">
+                <div className="bg-muted px-3 py-1 rounded-full text-xs text-muted-foreground">
+                  {getDateLabel(date)}
+                </div>
+              </div>
+              <div className="space-y-4">
+                {groupedMessages[date].map((msg) => (
+                  <div
+                    key={msg.id}
+                    className={cn("flex group", msg.isOwn ? "justify-end" : "justify-start")}
+                  >
+                    <div className="relative">
+                      <div
+                        className={cn(
+                          "max-w-[70%] rounded-2xl px-4 py-2 cursor-pointer",
+                          msg.isOwn
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-muted"
+                        )}
+                        onClick={() => setShowReactions(showReactions === msg.id ? null : msg.id)}
+                      >
                 {msg.type === "text" && <p className="break-words">{msg.text}</p>}
                 
                 {msg.type === "voice" && (
@@ -254,20 +317,61 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
                   </div>
                 )}
                 
-                <div
-                  className={cn(
-                    "flex items-center gap-1 mt-1 text-xs",
-                    msg.isOwn ? "text-primary-foreground/70" : "text-muted-foreground"
-                  )}
-                >
-                  <span>{msg.time}</span>
-                  {msg.isOwn && msg.status === "read" && (
-                    <Icon name="CheckCheck" size={14} />
-                  )}
-                  {msg.isOwn && msg.status === "sent" && (
-                    <Icon name="Check" size={14} />
-                  )}
-                </div>
+                        <div
+                          className={cn(
+                            "flex items-center gap-1 mt-1 text-xs",
+                            msg.isOwn ? "text-primary-foreground/70" : "text-muted-foreground"
+                          )}
+                        >
+                          <span>{msg.time}</span>
+                          {msg.isOwn && msg.status === "read" && (
+                            <Icon name="CheckCheck" size={14} />
+                          )}
+                          {msg.isOwn && msg.status === "sent" && (
+                            <Icon name="Check" size={14} />
+                          )}
+                        </div>
+                      </div>
+
+                      {msg.reactions && msg.reactions.length > 0 && (
+                        <div
+                          className={cn(
+                            "absolute -bottom-2 flex gap-1 bg-background border rounded-full px-2 py-0.5 shadow-sm",
+                            msg.isOwn ? "right-2" : "left-2"
+                          )}
+                        >
+                          {msg.reactions.map((reaction, idx) => (
+                            <span key={idx} className="text-sm">
+                              {reaction}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+
+                      {showReactions === msg.id && (
+                        <div
+                          className={cn(
+                            "absolute top-0 bg-background border rounded-full px-3 py-2 shadow-lg flex gap-2 z-10",
+                            msg.isOwn ? "right-full mr-2" : "left-full ml-2"
+                          )}
+                        >
+                          {reactions.map((reaction) => (
+                            <button
+                              key={reaction}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleReaction(msg.id, reaction);
+                              }}
+                              className="text-xl hover:scale-125 transition-transform"
+                            >
+                              {reaction}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
