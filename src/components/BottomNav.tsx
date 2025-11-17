@@ -10,8 +10,8 @@ interface BottomNavProps {
 export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
   const tabs = [
     { id: "chats", icon: "MessageCircle", label: "Сообщения" },
+    { id: "news", icon: "Newspaper", label: "Новости" },
     { id: "groups", icon: "Users", label: "Группы" },
-    { id: "feed", icon: "Home", label: "Общий чат" },
     { id: "profile", icon: "User", label: "Профиль" },
   ];
 

@@ -4,6 +4,7 @@ import ChatWindow from "@/components/ChatWindow";
 import GroupsTab from "@/components/GroupsTab";
 import FeedTab from "@/components/FeedTab";
 import ProfileTab from "@/components/ProfileTab";
+import NewsTab from "@/components/NewsTab";
 import BottomNav from "@/components/BottomNav";
 import { cn } from "@/lib/utils";
 
@@ -54,6 +55,8 @@ export default function Index() {
             </div>
           </>
         );
+      case "news":
+        return <NewsTab />;
       case "groups":
         return <GroupsTab />;
       case "feed":
