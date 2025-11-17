@@ -18,6 +18,11 @@ interface Message {
   fileSize?: string;
   duration?: string;
   reactions?: string[];
+  replyTo?: {
+    id: string;
+    text: string;
+    sender: string;
+  };
 }
 
 interface ChatWindowProps {
@@ -28,6 +33,8 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   const [message, setMessage] = useState("");
   const [isRecording, setIsRecording] = useState(false);
   const [showReactions, setShowReactions] = useState<string | null>(null);
+  const [showMenu, setShowMenu] = useState<string | null>(null);
+  const [replyingTo, setReplyingTo] = useState<Message | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const reactions = ["👍", "❤️", "😂", "😮", "😢", "🔥"];
@@ -103,10 +110,18 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       isOwn: true,
       status: "sent",
       type: "text",
+      replyTo: replyingTo
+        ? {
+            id: replyingTo.id,
+            text: replyingTo.text || "Голосовое сообщение",
+            sender: replyingTo.isOwn ? "Вы" : "Анна Смирнова",
+          }
+        : undefined,
     };
 
     setMessages([...messages, newMessage]);
     setMessage("");
+    setReplyingTo(null);
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -169,6 +184,29 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       })
     );
     setShowReactions(null);
+  };
+
+  const handleReply = (msg: Message) => {
+    setReplyingTo(msg);
+    setShowMenu(null);
+  };
+
+  const handleForward = (msg: Message) => {
+    alert(`Переслать сообщение: "${msg.text || msg.fileName || "Голосовое сообщение"}"`
+    );
+    setShowMenu(null);
+  };
+
+  const handleCopy = (msg: Message) => {
+    if (msg.text) {
+      navigator.clipboard.writeText(msg.text);
+    }
+    setShowMenu(null);
+  };
+
+  const handleDelete = (messageId: string) => {
+    setMessages(messages.filter((m) => m.id !== messageId));
+    setShowMenu(null);
   };
 
   const getDateLabel = (date: string) => {
@@ -254,6 +292,15 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
                     className={cn("flex group", msg.isOwn ? "justify-end" : "justify-start")}
                   >
                     <div className="relative">
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="opacity-0 group-hover:opacity-100 absolute -left-10 top-1/2 -translate-y-1/2 h-8 w-8"
+                        onClick={() => setShowMenu(showMenu === msg.id ? null : msg.id)}
+                      >
+                        <Icon name="MoreVertical" size={16} />
+                      </Button>
+                      
                       <div
                         className={cn(
                           "max-w-[70%] rounded-2xl px-4 py-2 cursor-pointer",
@@ -263,6 +310,17 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
                         )}
                         onClick={() => setShowReactions(showReactions === msg.id ? null : msg.id)}
                       >
+                        {msg.replyTo && (
+                          <div
+                            className={cn(
+                              "mb-2 pb-2 border-l-2 pl-2 text-xs opacity-80",
+                              msg.isOwn ? "border-primary-foreground/30" : "border-foreground/30"
+                            )}
+                          >
+                            <div className="font-semibold">{msg.replyTo.sender}</div>
+                            <div className="truncate">{msg.replyTo.text}</div>
+                          </div>
+                        )}
                 {msg.type === "text" && <p className="break-words">{msg.text}</p>}
                 
                 {msg.type === "voice" && (
@@ -369,6 +427,47 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
                           ))}
                         </div>
                       )}
+
+                      {showMenu === msg.id && (
+                        <div
+                          className={cn(
+                            "absolute top-0 bg-background border rounded-lg shadow-lg py-1 z-20 min-w-[150px]",
+                            msg.isOwn ? "right-full mr-2" : "left-full ml-2"
+                          )}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <button
+                            onClick={() => handleReply(msg)}
+                            className="w-full px-4 py-2 text-sm text-left hover:bg-muted flex items-center gap-2"
+                          >
+                            <Icon name="Reply" size={16} />
+                            Ответить
+                          </button>
+                          {msg.text && (
+                            <button
+                              onClick={() => handleCopy(msg)}
+                              className="w-full px-4 py-2 text-sm text-left hover:bg-muted flex items-center gap-2"
+                            >
+                              <Icon name="Copy" size={16} />
+                              Копировать
+                            </button>
+                          )}
+                          <button
+                            onClick={() => handleForward(msg)}
+                            className="w-full px-4 py-2 text-sm text-left hover:bg-muted flex items-center gap-2"
+                          >
+                            <Icon name="Forward" size={16} />
+                            Переслать
+                          </button>
+                          <button
+                            onClick={() => handleDelete(msg.id)}
+                            className="w-full px-4 py-2 text-sm text-left hover:bg-muted flex items-center gap-2 text-destructive"
+                          >
+                            <Icon name="Trash2" size={16} />
+                            Удалить
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -379,6 +478,26 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       </ScrollArea>
 
       <div className="border-t p-4">
+        {replyingTo && (
+          <div className="mb-2 p-3 bg-muted rounded-lg flex items-start justify-between">
+            <div className="flex-1">
+              <div className="text-xs font-semibold text-primary mb-1">
+                Ответ для {replyingTo.isOwn ? "себя" : "Анна Смирнова"}
+              </div>
+              <div className="text-sm truncate">
+                {replyingTo.text || replyingTo.fileName || "Голосовое сообщение"}
+              </div>
+            </div>
+            <Button
+              size="icon"
+              variant="ghost"
+              className="h-6 w-6"
+              onClick={() => setReplyingTo(null)}
+            >
+              <Icon name="X" size={16} />
+            </Button>
+          </div>
+        )}
         <div className="flex items-end gap-2">
           <input
             ref={fileInputRef}
