@@ -1,9 +1,9 @@
 import { useState } from "react";
 import ChatSidebar from "@/components/ChatSidebar";
 import ChatWindow from "@/components/ChatWindow";
-import CallsTab from "@/components/CallsTab";
-import ContactsTab from "@/components/ContactsTab";
-import SettingsTab from "@/components/SettingsTab";
+import GroupsTab from "@/components/GroupsTab";
+import FeedTab from "@/components/FeedTab";
+import ProfileTab from "@/components/ProfileTab";
 import BottomNav from "@/components/BottomNav";
 
 export default function Index() {
@@ -22,12 +22,12 @@ export default function Index() {
             <ChatWindow chatId={selectedChatId} />
           </>
         );
-      case "calls":
-        return <CallsTab />;
-      case "contacts":
-        return <ContactsTab />;
-      case "settings":
-        return <SettingsTab />;
+      case "groups":
+        return <GroupsTab />;
+      case "feed":
+        return <FeedTab />;
+      case "profile":
+        return <ProfileTab />;
       default:
         return null;
     }
