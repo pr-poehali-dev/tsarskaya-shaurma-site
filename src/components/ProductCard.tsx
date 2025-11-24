@@ -8,6 +8,7 @@ export interface Product {
   image: string;
   description: string;
   features: string[];
+  images?: string[];
 }
 
 interface ProductCardProps {
@@ -18,12 +19,26 @@ interface ProductCardProps {
 export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
   return (
     <Card className="group overflow-hidden bg-white hover:shadow-xl transition-all duration-500">
-      <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-full object-contain p-8 group-hover:scale-110 transition-transform duration-700"
-        />
+      <div className="grid md:grid-cols-3 gap-4 p-4">
+        {product.images && product.images.length > 0 ? (
+          product.images.map((img, index) => (
+            <div key={index} className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
+              <img
+                src={img}
+                alt={`${product.name} - ${index + 1}`}
+                className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-700"
+              />
+            </div>
+          ))
+        ) : (
+          <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg md:col-span-3">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-full object-contain p-8 group-hover:scale-110 transition-transform duration-700"
+            />
+          </div>
+        )}
       </div>
       
       <div className="p-8 space-y-6">

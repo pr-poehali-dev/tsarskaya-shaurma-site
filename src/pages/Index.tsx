@@ -22,23 +22,12 @@ export default function Index() {
       price: 24990,
       image: "https://cdn.poehali.dev/files/2bd30ec3-a8e8-481b-b6e4-93398810a70d.jpg",
       description: "Флагманская модель с активным шумоподавлением и Hi-Res звуком",
-      features: ["ANC Pro", "40 часов работы", "Hi-Res Audio", "Быстрая зарядка"]
-    },
-    {
-      id: 2,
-      name: "Bass Pro Studio",
-      price: 19990,
-      image: "https://cdn.poehali.dev/files/51b3e917-6eb4-41f8-b7e0-1a0cb0af09a2.jpg",
-      description: "Профессиональные наушники для студийной работы",
-      features: ["Студийный звук", "35 часов работы", "Премиум драйверы", "USB-C"]
-    },
-    {
-      id: 3,
-      name: "Bass Pro Sport",
-      price: 16990,
-      image: "https://cdn.poehali.dev/files/0564c7d6-cde4-4b4b-ad93-2fffccf133d8.jpg",
-      description: "Компактные наушники для активного образа жизни",
-      features: ["Защита IP54", "30 часов работы", "Спортивный дизайн", "Сенсорное управление"]
+      features: ["ANC Pro", "40 часов работы", "Hi-Res Audio", "Быстрая зарядка"],
+      images: [
+        "https://cdn.poehali.dev/files/2bd30ec3-a8e8-481b-b6e4-93398810a70d.jpg",
+        "https://cdn.poehali.dev/files/51b3e917-6eb4-41f8-b7e0-1a0cb0af09a2.jpg",
+        "https://cdn.poehali.dev/files/0564c7d6-cde4-4b4b-ad93-2fffccf133d8.jpg"
+      ]
     }
   ];
 
@@ -90,7 +79,7 @@ export default function Index() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="max-w-4xl mx-auto">
               {products.map((product) => (
                 <ProductCard
                   key={product.id}
@@ -164,8 +153,8 @@ export default function Index() {
                   <div className="text-sm text-muted-foreground">Год основания</div>
                 </div>
                 <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl space-y-2">
-                  <div className="text-4xl font-bold">3</div>
-                  <div className="text-sm text-muted-foreground">Модели</div>
+                  <div className="text-4xl font-bold">1</div>
+                  <div className="text-sm text-muted-foreground">Модель</div>
                 </div>
                 <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl space-y-2">
                   <div className="text-4xl font-bold">99%</div>
