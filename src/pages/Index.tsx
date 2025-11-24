@@ -106,16 +106,19 @@ export default function Index() {
       <main className="flex-1">
         <Hero />
 
-        <section id="catalog" className="container py-16">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Наша коллекция</h2>
+        <section id="catalog" className="container py-24">
+          <div className="text-center mb-16 space-y-4">
+            <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
+              <span className="text-sm font-bold text-primary">КОЛЛЕКЦИЯ 2024</span>
+            </div>
+            <h2 className="text-5xl md:text-6xl font-bold">Наши дизайны</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Эксклюзивные дизайны, премиум качество ткани и печати. 
               Каждая футболка создана с любовью к породе Хаски.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {products.map((product) => (
               <ProductCard
                 key={product.id}
@@ -126,66 +129,120 @@ export default function Index() {
           </div>
         </section>
 
-        <section id="about" className="bg-muted/50 py-16">
+        <section id="about" className="bg-gradient-to-b from-background to-secondary py-24">
           <div className="container">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-4xl font-bold mb-6">О нас</h2>
-              <p className="text-lg text-muted-foreground mb-4">
-                Мы создаем премиум футболки для тех, кто любит Хаски так же сильно, как и мы. 
-                Используем только качественные материалы и современные технологии печати.
-              </p>
-              <p className="text-lg text-muted-foreground">
-                Каждый дизайн разработан с вниманием к деталям, чтобы передать характер и красоту этой удивительной породы.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section id="delivery" className="container py-16">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-bold mb-8 text-center">Доставка и оплата</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="p-6 border rounded-lg">
-                <h3 className="text-xl font-semibold mb-3">Доставка</h3>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li>✓ По России: 3-7 дней</li>
-                  <li>✓ Бесплатная доставка от 5000 ₽</li>
-                  <li>✓ Курьером по Москве: 300 ₽</li>
-                  <li>✓ Почта России: 400 ₽</li>
-                </ul>
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-5xl md:text-6xl font-bold mb-6">О нас</h2>
               </div>
-              <div className="p-6 border rounded-lg">
-                <h3 className="text-xl font-semibold mb-3">Оплата</h3>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li>✓ Картой онлайн</li>
-                  <li>✓ При получении</li>
-                  <li>✓ СБП</li>
-                  <li>✓ Безопасная сделка</li>
-                </ul>
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="text-center p-8 bg-background rounded-2xl shadow-lg">
+                  <div className="text-4xl mb-4">🎨</div>
+                  <h3 className="text-xl font-bold mb-3">Уникальный дизайн</h3>
+                  <p className="text-muted-foreground">
+                    Каждый принт разработан профессиональными дизайнерами
+                  </p>
+                </div>
+                <div className="text-center p-8 bg-background rounded-2xl shadow-lg">
+                  <div className="text-4xl mb-4">✨</div>
+                  <h3 className="text-xl font-bold mb-3">Премиум качество</h3>
+                  <p className="text-muted-foreground">
+                    100% хлопок и современные технологии печати
+                  </p>
+                </div>
+                <div className="text-center p-8 bg-background rounded-2xl shadow-lg">
+                  <div className="text-4xl mb-4">❤️</div>
+                  <h3 className="text-xl font-bold mb-3">С любовью к породе</h3>
+                  <p className="text-muted-foreground">
+                    Создано энтузиастами для владельцев Хаски
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="contact" className="bg-muted/50 py-16">
-          <div className="container text-center">
-            <h2 className="text-4xl font-bold mb-4">Остались вопросы?</h2>
-            <p className="text-lg text-muted-foreground mb-6">
-              Напишите нам, и мы с радостью ответим на все ваши вопросы
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="mailto:info@huskypremium.ru"
-                className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
-              >
-                Написать на почту
-              </a>
-              <a 
-                href="tel:+79999999999"
-                className="inline-flex items-center justify-center px-6 py-3 border border-primary text-primary rounded-md hover:bg-primary/10 transition-colors"
-              >
-                Позвонить
-              </a>
+        <section id="delivery" className="container py-24">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-5xl md:text-6xl font-bold mb-4">Доставка и оплата</h2>
+              <p className="text-lg text-muted-foreground">Удобные способы доставки и оплаты</p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="p-8 border-2 rounded-2xl hover:border-primary transition-colors bg-secondary/30">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-2xl">📦</div>
+                  <h3 className="text-2xl font-bold">Доставка</h3>
+                </div>
+                <ul className="space-y-3 text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary font-bold mt-1">✓</span>
+                    <span>По России: 3-7 дней</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary font-bold mt-1">✓</span>
+                    <span>Бесплатная доставка от 5000 ₽</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary font-bold mt-1">✓</span>
+                    <span>Курьером по Москве: 300 ₽</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary font-bold mt-1">✓</span>
+                    <span>Почта России: 400 ₽</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="p-8 border-2 rounded-2xl hover:border-primary transition-colors bg-secondary/30">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-2xl">💳</div>
+                  <h3 className="text-2xl font-bold">Оплата</h3>
+                </div>
+                <ul className="space-y-3 text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary font-bold mt-1">✓</span>
+                    <span>Картой онлайн</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary font-bold mt-1">✓</span>
+                    <span>При получении</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary font-bold mt-1">✓</span>
+                    <span>СБП</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary font-bold mt-1">✓</span>
+                    <span>Безопасная сделка</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" className="relative py-24 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10"></div>
+          <div className="container relative text-center">
+            <div className="max-w-2xl mx-auto">
+              <h2 className="text-5xl md:text-6xl font-bold mb-6">Остались вопросы?</h2>
+              <p className="text-xl text-muted-foreground mb-10">
+                Напишите нам, и мы с радостью ответим на все ваши вопросы
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a 
+                  href="mailto:info@huskypremium.ru"
+                  className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all"
+                >
+                  Написать на почту
+                </a>
+                <a 
+                  href="tel:+79999999999"
+                  className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold border-2 border-primary text-primary rounded-xl hover:bg-primary hover:text-primary-foreground transition-all"
+                >
+                  Позвонить
+                </a>
+              </div>
             </div>
           </div>
         </section>

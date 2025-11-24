@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,35 +6,35 @@
 
 @layer base {
   :root {
-    --background: 25 100% 98%;
-    --foreground: 25 40% 20%;
+    --background: 0 0% 100%;
+    --foreground: 220 13% 13%;
 
     --card: 0 0% 100%;
-    --card-foreground: 25 40% 20%;
+    --card-foreground: 220 13% 13%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 25 40% 20%;
+    --popover-foreground: 220 13% 13%;
 
-    --primary: 340 82% 65%;
+    --primary: 200 100% 35%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 25 75% 70%;
-    --secondary-foreground: 25 40% 20%;
+    --secondary: 200 20% 96%;
+    --secondary-foreground: 220 13% 13%;
 
-    --muted: 25 50% 95%;
-    --muted-foreground: 25 20% 50%;
+    --muted: 200 20% 96%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 200 75% 65%;
+    --accent: 200 100% 35%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 20% 88%;
-    --input: 40 20% 88%;
-    --ring: 38 92% 50%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 200 100% 35%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -99,7 +99,7 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: "Quicksand", sans-serif;
+    font-family: "Inter", sans-serif;
   }
 
   h1,
@@ -108,7 +108,7 @@
   h4,
   h5,
   h6 {
-    font-family: "Pacifico", cursive;
-    font-weight: 400;
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
   }
 }

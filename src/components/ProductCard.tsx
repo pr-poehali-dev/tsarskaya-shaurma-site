@@ -18,32 +18,34 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
-      <div className="aspect-square overflow-hidden bg-muted">
+    <Card className="group overflow-hidden border-2 hover:border-primary/50 hover:shadow-2xl transition-all duration-300">
+      <div className="relative aspect-square overflow-hidden bg-secondary">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
+        <div className="absolute top-3 right-3 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-bold">
+          {product.price} ₽
+        </div>
       </div>
-      <CardContent className="p-4">
-        <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
-        <p className="text-sm text-muted-foreground mb-3">{product.description}</p>
-        <div className="flex items-center gap-2 mb-2">
-          <Icon name="Ruler" size={16} className="text-muted-foreground" />
-          <span className="text-sm text-muted-foreground">
-            Размеры: {product.sizes.join(', ')}
+      <CardContent className="p-6 space-y-3">
+        <h3 className="font-bold text-xl">{product.name}</h3>
+        <p className="text-sm text-muted-foreground leading-relaxed">{product.description}</p>
+        <div className="flex items-center gap-2 pt-2">
+          <Icon name="Ruler" size={18} className="text-primary" />
+          <span className="text-sm font-medium">
+            {product.sizes.join(' · ')}
           </span>
         </div>
-        <div className="text-2xl font-bold text-primary">{product.price} ₽</div>
       </CardContent>
-      <CardFooter className="p-4 pt-0">
+      <CardFooter className="p-6 pt-0">
         <Button 
-          className="w-full" 
+          className="w-full h-12 text-base font-semibold shadow-md hover:shadow-lg transition-shadow" 
           onClick={() => onAddToCart(product)}
         >
-          <Icon name="ShoppingCart" size={18} className="mr-2" />
-          В корзину
+          <Icon name="ShoppingBag" size={20} className="mr-2" />
+          Добавить в корзину
         </Button>
       </CardFooter>
     </Card>
