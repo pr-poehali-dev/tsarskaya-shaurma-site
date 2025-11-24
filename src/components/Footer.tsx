@@ -2,69 +2,57 @@ import Icon from "@/components/ui/icon";
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-white border-t-4 border-white">
+    <footer className="bg-white border-t border-border">
       <div className="container py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          <div>
-            <div className="text-3xl font-bold mb-4">
-              HUSKY<span className="text-gray-400">®</span>
-            </div>
-            <p className="text-sm text-gray-400 font-medium">
-              Премиум футболки для ценителей породы
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold">Bass Pro</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Профессиональные беспроводные наушники премиум-класса
             </p>
           </div>
-
-          <div>
-            <h3 className="text-xs font-bold uppercase tracking-widest mb-4">Навигация</h3>
-            <nav className="flex flex-col gap-3">
-              <a href="#catalog" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
-                Каталог
-              </a>
-              <a href="#about" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
-                О нас
-              </a>
-              <a href="#delivery" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
-                Доставка
-              </a>
-            </nav>
+          
+          <div className="space-y-4">
+            <h4 className="font-semibold">Продукция</h4>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li><a href="#" className="hover:text-foreground transition-colors">Наушники</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Аксессуары</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Кейсы</a></li>
+            </ul>
           </div>
-
-          <div>
-            <h3 className="text-xs font-bold uppercase tracking-widest mb-4">Контакты</h3>
-            <div className="flex flex-col gap-3 text-sm font-medium text-gray-400">
-              <a href="mailto:info@huskypremium.ru" className="hover:text-white transition-colors">
-                info@huskypremium.ru
-              </a>
-              <a href="tel:+79999999999" className="hover:text-white transition-colors">
-                +7 (999) 999-99-99
-              </a>
-            </div>
+          
+          <div className="space-y-4">
+            <h4 className="font-semibold">Поддержка</h4>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li><a href="#" className="hover:text-foreground transition-colors">Гарантия</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Доставка</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">Возврат</a></li>
+              <li><a href="#" className="hover:text-foreground transition-colors">FAQ</a></li>
+            </ul>
           </div>
-
-          <div>
-            <h3 className="text-xs font-bold uppercase tracking-widest mb-4">Соцсети</h3>
-            <div className="flex gap-3">
-              <a href="#" className="w-10 h-10 border-2 border-white hover:bg-white hover:text-black flex items-center justify-center transition-colors">
-                <Icon name="Instagram" size={20} />
+          
+          <div className="space-y-4">
+            <h4 className="font-semibold">Контакты</h4>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li>support@basspro.ru</li>
+              <li>+7 (495) 123-45-67</li>
+            </ul>
+            <div className="flex gap-3 pt-2">
+              <a href="#" className="w-10 h-10 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors flex items-center justify-center">
+                <Icon name="Instagram" size={18} />
               </a>
-              <a href="#" className="w-10 h-10 border-2 border-white hover:bg-white hover:text-black flex items-center justify-center transition-colors">
-                <Icon name="Facebook" size={20} />
+              <a href="#" className="w-10 h-10 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors flex items-center justify-center">
+                <Icon name="Youtube" size={18} />
               </a>
-              <a href="#" className="w-10 h-10 border-2 border-white hover:bg-white hover:text-black flex items-center justify-center transition-colors">
-                <Icon name="Twitter" size={20} />
+              <a href="#" className="w-10 h-10 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors flex items-center justify-center">
+                <Icon name="Twitter" size={18} />
               </a>
             </div>
           </div>
         </div>
-
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs font-bold uppercase tracking-widest text-gray-400">
-            &copy; 2024 Husky Premium. Все права защищены.
-          </p>
-          <div className="flex gap-6 text-xs font-bold uppercase tracking-widest text-gray-400">
-            <a href="#" className="hover:text-white transition-colors">Политика</a>
-            <a href="#" className="hover:text-white transition-colors">Условия</a>
-          </div>
+        
+        <div className="border-t border-border mt-12 pt-8 text-center text-sm text-muted-foreground">
+          <p>© 2024 Bass Pro. Все права защищены.</p>
         </div>
       </div>
     </footer>
