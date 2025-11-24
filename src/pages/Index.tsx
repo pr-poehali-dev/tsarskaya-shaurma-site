@@ -19,10 +19,10 @@ export default function Index() {
     {
       id: 1,
       name: "Bass Pro Elite",
-      price: 24990,
+      price: 8000,
       image: "https://cdn.poehali.dev/files/2bd30ec3-a8e8-481b-b6e4-93398810a70d.jpg",
       description: "Флагманская модель с активным шумоподавлением и Hi-Res звуком",
-      features: ["ANC Pro", "40 часов работы", "Hi-Res Audio", "Быстрая зарядка"],
+      features: ["ANC Pro", "Hi-Res Audio", "Быстрая зарядка"],
       images: [
         "https://cdn.poehali.dev/files/2bd30ec3-a8e8-481b-b6e4-93398810a70d.jpg",
         "https://cdn.poehali.dev/files/51b3e917-6eb4-41f8-b7e0-1a0cb0af09a2.jpg",
