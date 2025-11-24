@@ -106,55 +106,51 @@ export default function Index() {
       <main className="flex-1">
         <Hero />
 
-        <section id="catalog" className="container py-24">
-          <div className="text-center mb-16 space-y-4">
-            <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
-              <span className="text-sm font-bold text-primary">КОЛЛЕКЦИЯ 2024</span>
-            </div>
-            <h2 className="text-5xl md:text-6xl font-bold">Наши дизайны</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Эксклюзивные дизайны, премиум качество ткани и печати. 
-              Каждая футболка создана с любовью к породе Хаски.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                onAddToCart={handleAddToCart}
-              />
-            ))}
-          </div>
-        </section>
-
-        <section id="about" className="bg-gradient-to-b from-background to-secondary py-24">
+        <section id="catalog" className="py-24 bg-white">
           <div className="container">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-5xl md:text-6xl font-bold mb-6">О нас</h2>
+            <div className="mb-20 space-y-2">
+              <div className="inline-block border-2 border-black px-4 py-1 mb-4">
+                <span className="text-xs font-bold uppercase tracking-widest">КОЛЛЕКЦИЯ 2024</span>
               </div>
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="text-center p-8 bg-background rounded-2xl shadow-lg">
-                  <div className="text-4xl mb-4">🎨</div>
-                  <h3 className="text-xl font-bold mb-3">Уникальный дизайн</h3>
-                  <p className="text-muted-foreground">
-                    Каждый принт разработан профессиональными дизайнерами
+              <h2 className="text-6xl md:text-8xl font-bold">НОВАЯ КОЛЛЕКЦИЯ</h2>
+              <p className="text-lg font-medium max-w-2xl pt-4">
+                Эксклюзивные дизайны. Премиум качество.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {products.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onAddToCart={handleAddToCart}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="about" className="py-32 bg-black text-white">
+          <div className="container">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-6xl md:text-8xl font-bold mb-20">ПОЧЕМУ МЫ?</h2>
+              <div className="grid md:grid-cols-3 gap-12">
+                <div className="space-y-4 border-l-4 border-white pl-6">
+                  <h3 className="text-3xl font-bold">ПРЕМИУМ</h3>
+                  <p className="text-gray-400 font-medium">
+                    100% хлопок. Лучшие ткани от европейских производителей.
                   </p>
                 </div>
-                <div className="text-center p-8 bg-background rounded-2xl shadow-lg">
-                  <div className="text-4xl mb-4">✨</div>
-                  <h3 className="text-xl font-bold mb-3">Премиум качество</h3>
-                  <p className="text-muted-foreground">
-                    100% хлопок и современные технологии печати
+                <div className="space-y-4 border-l-4 border-white pl-6">
+                  <h3 className="text-3xl font-bold">ДИЗАЙН</h3>
+                  <p className="text-gray-400 font-medium">
+                    Эксклюзивные принты. Созданы профессиональными дизайнерами.
                   </p>
                 </div>
-                <div className="text-center p-8 bg-background rounded-2xl shadow-lg">
-                  <div className="text-4xl mb-4">❤️</div>
-                  <h3 className="text-xl font-bold mb-3">С любовью к породе</h3>
-                  <p className="text-muted-foreground">
-                    Создано энтузиастами для владельцев Хаски
+                <div className="space-y-4 border-l-4 border-white pl-6">
+                  <h3 className="text-3xl font-bold">КАЧЕСТВО</h3>
+                  <p className="text-gray-400 font-medium">
+                    Современные технологии печати. Стойкость к стирке.
                   </p>
                 </div>
               </div>
@@ -162,58 +158,49 @@ export default function Index() {
           </div>
         </section>
 
-        <section id="delivery" className="container py-24">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-5xl md:text-6xl font-bold mb-4">Доставка и оплата</h2>
-              <p className="text-lg text-muted-foreground">Удобные способы доставки и оплаты</p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="p-8 border-2 rounded-2xl hover:border-primary transition-colors bg-secondary/30">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-2xl">📦</div>
-                  <h3 className="text-2xl font-bold">Доставка</h3>
-                </div>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold mt-1">✓</span>
-                    <span>По России: 3-7 дней</span>
+        <section id="delivery" className="py-24 bg-white">
+          <div className="container max-w-6xl">
+            <h2 className="text-6xl md:text-8xl font-bold mb-20">ДОСТАВКА</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="p-10 border-2 border-black hover:bg-black hover:text-white transition-all group">
+                <h3 className="text-3xl font-bold mb-6">ДОСТАВКА</h3>
+                <ul className="space-y-4 text-lg font-medium">
+                  <li className="flex items-start gap-3">
+                    <span className="font-bold">—</span>
+                    <span>По России 3-7 дней</span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold mt-1">✓</span>
-                    <span>Бесплатная доставка от 5000 ₽</span>
+                  <li className="flex items-start gap-3">
+                    <span className="font-bold">—</span>
+                    <span>Бесплатно от 5000₽</span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold mt-1">✓</span>
-                    <span>Курьером по Москве: 300 ₽</span>
+                  <li className="flex items-start gap-3">
+                    <span className="font-bold">—</span>
+                    <span>Курьер Москва 300₽</span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold mt-1">✓</span>
-                    <span>Почта России: 400 ₽</span>
+                  <li className="flex items-start gap-3">
+                    <span className="font-bold">—</span>
+                    <span>Почта России 400₽</span>
                   </li>
                 </ul>
               </div>
-              <div className="p-8 border-2 rounded-2xl hover:border-primary transition-colors bg-secondary/30">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-2xl">💳</div>
-                  <h3 className="text-2xl font-bold">Оплата</h3>
-                </div>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold mt-1">✓</span>
+              <div className="p-10 border-2 border-black hover:bg-black hover:text-white transition-all group">
+                <h3 className="text-3xl font-bold mb-6">ОПЛАТА</h3>
+                <ul className="space-y-4 text-lg font-medium">
+                  <li className="flex items-start gap-3">
+                    <span className="font-bold">—</span>
                     <span>Картой онлайн</span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold mt-1">✓</span>
+                  <li className="flex items-start gap-3">
+                    <span className="font-bold">—</span>
                     <span>При получении</span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold mt-1">✓</span>
+                  <li className="flex items-start gap-3">
+                    <span className="font-bold">—</span>
                     <span>СБП</span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary font-bold mt-1">✓</span>
-                    <span>Безопасная сделка</span>
+                  <li className="flex items-start gap-3">
+                    <span className="font-bold">—</span>
+                    <span>100% безопасно</span>
                   </li>
                 </ul>
               </div>
@@ -221,24 +208,23 @@ export default function Index() {
           </div>
         </section>
 
-        <section id="contact" className="relative py-24 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10"></div>
-          <div className="container relative text-center">
-            <div className="max-w-2xl mx-auto">
-              <h2 className="text-5xl md:text-6xl font-bold mb-6">Остались вопросы?</h2>
-              <p className="text-xl text-muted-foreground mb-10">
-                Напишите нам, и мы с радостью ответим на все ваши вопросы
+        <section id="contact" className="py-32 bg-gray-100">
+          <div className="container text-center">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-6xl md:text-8xl font-bold mb-8">КОНТАКТЫ</h2>
+              <p className="text-xl font-medium mb-12">
+                Есть вопросы? Мы на связи 24/7
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a 
                   href="mailto:info@huskypremium.ru"
-                  className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all"
+                  className="inline-flex items-center justify-center px-10 py-5 text-sm font-bold uppercase tracking-widest bg-black text-white hover:bg-gray-800 transition-colors"
                 >
-                  Написать на почту
+                  Написать
                 </a>
                 <a 
                   href="tel:+79999999999"
-                  className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold border-2 border-primary text-primary rounded-xl hover:bg-primary hover:text-primary-foreground transition-all"
+                  className="inline-flex items-center justify-center px-10 py-5 text-sm font-bold uppercase tracking-widest border-2 border-black hover:bg-black hover:text-white transition-colors"
                 >
                   Позвонить
                 </a>

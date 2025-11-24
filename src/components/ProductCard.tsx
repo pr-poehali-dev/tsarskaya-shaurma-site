@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
 
 export interface Product {
@@ -18,36 +17,40 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
   return (
-    <Card className="group overflow-hidden border-2 hover:border-primary/50 hover:shadow-2xl transition-all duration-300">
-      <div className="relative aspect-square overflow-hidden bg-secondary">
+    <div className="group relative overflow-hidden bg-white border-2 border-black hover:shadow-2xl transition-all duration-300">
+      <div className="relative aspect-square overflow-hidden bg-gray-100">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
         />
-        <div className="absolute top-3 right-3 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-bold">
-          {product.price} ₽
-        </div>
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
       </div>
-      <CardContent className="p-6 space-y-3">
-        <h3 className="font-bold text-xl">{product.name}</h3>
-        <p className="text-sm text-muted-foreground leading-relaxed">{product.description}</p>
-        <div className="flex items-center gap-2 pt-2">
-          <Icon name="Ruler" size={18} className="text-primary" />
-          <span className="text-sm font-medium">
-            {product.sizes.join(' · ')}
-          </span>
+      
+      <div className="p-6 space-y-4">
+        <div className="flex items-start justify-between gap-4">
+          <div className="space-y-2">
+            <h3 className="text-2xl font-bold uppercase tracking-wide">{product.name}</h3>
+            <p className="text-sm text-gray-600 font-medium">{product.description}</p>
+          </div>
+          <div className="text-2xl font-bold whitespace-nowrap">{product.price} ₽</div>
         </div>
-      </CardContent>
-      <CardFooter className="p-6 pt-0">
+        
+        <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gray-600">
+          {product.sizes.map((size) => (
+            <span key={size} className="border border-gray-300 px-3 py-1 hover:border-black hover:bg-black hover:text-white transition-colors cursor-pointer">
+              {size}
+            </span>
+          ))}
+        </div>
+        
         <Button 
-          className="w-full h-12 text-base font-semibold shadow-md hover:shadow-lg transition-shadow" 
+          className="w-full h-14 text-sm font-bold uppercase tracking-widest bg-black hover:bg-gray-800 transition-colors" 
           onClick={() => onAddToCart(product)}
         >
-          <Icon name="ShoppingBag" size={20} className="mr-2" />
           Добавить в корзину
         </Button>
-      </CardFooter>
-    </Card>
+      </div>
+    </div>
   );
 }
