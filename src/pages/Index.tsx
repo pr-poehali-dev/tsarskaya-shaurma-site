@@ -28,6 +28,86 @@ export default function Index() {
         "https://cdn.poehali.dev/files/51b3e917-6eb4-41f8-b7e0-1a0cb0af09a2.jpg",
         "https://cdn.poehali.dev/files/0564c7d6-cde4-4b4b-ad93-2fffccf133d8.jpg"
       ]
+    },
+    {
+      id: 2,
+      name: "Urban Sound X",
+      price: 5500,
+      image: "https://cdn.poehali.dev/files/2bd30ec3-a8e8-481b-b6e4-93398810a70d.jpg",
+      description: "Стильные городские наушники с отличной звукоизоляцией",
+      features: ["Басс усиление", "30 часов работы", "Складная конструкция"]
+    },
+    {
+      id: 3,
+      name: "Sport Wave",
+      price: 4200,
+      image: "https://cdn.poehali.dev/files/51b3e917-6eb4-41f8-b7e0-1a0cb0af09a2.jpg",
+      description: "Водонепроницаемые наушники для спорта и активного отдыха",
+      features: ["IPX7", "Крепление на ухо", "Управление жестами"]
+    },
+    {
+      id: 4,
+      name: "Studio Pro Max",
+      price: 12000,
+      image: "https://cdn.poehali.dev/files/0564c7d6-cde4-4b4b-ad93-2fffccf133d8.jpg",
+      description: "Профессиональные студийные наушники для записи",
+      features: ["Студийное качество", "Съёмный кабель", "Мягкие амбушюры"]
+    },
+    {
+      id: 5,
+      name: "Travel Comfort",
+      price: 6800,
+      image: "https://cdn.poehali.dev/files/2bd30ec3-a8e8-481b-b6e4-93398810a70d.jpg",
+      description: "Идеальны для путешествий с функцией шумоподавления",
+      features: ["ANC", "Компактный чехол", "35 часов автономности"]
+    },
+    {
+      id: 6,
+      name: "Gaming Force",
+      price: 7500,
+      image: "https://cdn.poehali.dev/files/51b3e917-6eb4-41f8-b7e0-1a0cb0af09a2.jpg",
+      description: "Игровые наушники с объёмным 7.1 звуком",
+      features: ["7.1 Surround", "RGB подсветка", "Микрофон с шумоподавлением"]
+    },
+    {
+      id: 7,
+      name: "Classic Vibe",
+      price: 3500,
+      image: "https://cdn.poehali.dev/files/0564c7d6-cde4-4b4b-ad93-2fffccf133d8.jpg",
+      description: "Классический дизайн с современным звучанием",
+      features: ["Ретро стиль", "Качественный звук", "Лёгкий вес"]
+    },
+    {
+      id: 8,
+      name: "Office Zoom",
+      price: 4800,
+      image: "https://cdn.poehali.dev/files/2bd30ec3-a8e8-481b-b6e4-93398810a70d.jpg",
+      description: "Для удаленной работы и видеоконференций",
+      features: ["Чистый микрофон", "Шумоподавление голоса", "Multipoint"]
+    },
+    {
+      id: 9,
+      name: "Kids Safe",
+      price: 2900,
+      image: "https://cdn.poehali.dev/files/51b3e917-6eb4-41f8-b7e0-1a0cb0af09a2.jpg",
+      description: "Безопасные детские наушники с ограничением громкости",
+      features: ["Ограничение 85 дБ", "Яркий дизайн", "Прочная конструкция"]
+    },
+    {
+      id: 10,
+      name: "Budget Beat",
+      price: 1990,
+      image: "https://cdn.poehali.dev/files/0564c7d6-cde4-4b4b-ad93-2fffccf133d8.jpg",
+      description: "Доступная модель с хорошим качеством звука",
+      features: ["Отличная цена", "20 часов работы", "Bluetooth 5.0"]
+    },
+    {
+      id: 11,
+      name: "Wireless Freedom",
+      price: 9200,
+      image: "https://cdn.poehali.dev/files/2bd30ec3-a8e8-481b-b6e4-93398810a70d.jpg",
+      description: "Полная свобода движений с premium звуком",
+      features: ["ANC Hybrid", "50 часов работы", "Сенсорное управление"]
     }
   ];
 
@@ -153,8 +233,8 @@ export default function Index() {
                   <div className="text-sm text-muted-foreground">Год основания</div>
                 </div>
                 <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl space-y-2">
-                  <div className="text-4xl font-bold">1</div>
-                  <div className="text-sm text-muted-foreground">Модель</div>
+                  <div className="text-4xl font-bold">11</div>
+                  <div className="text-sm text-muted-foreground">Моделей</div>
                 </div>
                 <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl space-y-2">
                   <div className="text-4xl font-bold">99%</div>
