@@ -4,123 +4,131 @@ export default function Index() {
   const toys = [
     {
       id: 1,
-      name: "Мишка в платьице",
+      name: "Медвежонок в платье",
       price: "3 500 ₽",
       image: "https://cdn.poehali.dev/projects/e90906d7-b9fe-4eb5-9ad3-bc94366fa418/files/b3ffddef-7196-4537-acc3-5443d1304fbe.jpg",
-      description: "Деревянный медвежонок в текстильном платье, расписанный вручную",
-      color: "bg-pink-400"
+      description: "Деревянный мишка с текстильным нарядом, роспись вручную"
     },
     {
       id: 2,
       name: "Лошадка-качалка",
       price: "8 900 ₽",
       image: "https://cdn.poehali.dev/projects/e90906d7-b9fe-4eb5-9ad3-bc94366fa418/files/5cfae7c1-011f-4599-aff1-6d11a0d8ef98.jpg",
-      description: "Классическая качалка из массива, окрашенная природными красками",
-      color: "bg-yellow-400"
+      description: "Классическая качалка из массива дерева"
     },
     {
       id: 3,
       name: "Кукла в народном костюме",
       price: "4 200 ₽",
       image: "https://cdn.poehali.dev/projects/e90906d7-b9fe-4eb5-9ad3-bc94366fa418/files/93b7a87d-a421-4ed9-9d6b-e5749afd28e1.jpg",
-      description: "Тряпичная кукла с вышивкой в традициях русского промысла",
-      color: "bg-purple-400"
+      description: "Текстильная кукла с вышивкой ручной работы"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-blue-100 to-yellow-100">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-pink-300 rounded-full blur-3xl opacity-40 animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-40 h-40 bg-blue-300 rounded-full blur-3xl opacity-40 animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute bottom-20 left-1/4 w-36 h-36 bg-yellow-300 rounded-full blur-3xl opacity-40 animate-pulse" style={{animationDelay: '2s'}}></div>
-        <div className="absolute bottom-40 right-1/3 w-44 h-44 bg-purple-300 rounded-full blur-3xl opacity-40 animate-pulse" style={{animationDelay: '1.5s'}}></div>
-      </div>
-
-      <header className="relative bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white py-8 shadow-2xl">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center gap-4 animate-bounce" style={{animationDuration: '2s'}}>
-            <div className="text-5xl">🎨</div>
-            <h1 className="text-4xl md:text-5xl font-black tracking-wide drop-shadow-lg">
-              Волшебные Игрушки
-            </h1>
-            <div className="text-5xl">✨</div>
+    <div className="min-h-screen bg-neutral-950">
+      <div className="absolute inset-0 bg-gradient-to-br from-amber-900/10 via-neutral-950 to-rose-950/10"></div>
+      
+      <header className="relative border-b border-amber-900/20 backdrop-blur-xl bg-neutral-950/90">
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex items-center justify-center gap-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/50">
+              <Icon name="Sparkles" size={24} className="text-neutral-950" />
+            </div>
+            <div className="text-center">
+              <h1 className="text-3xl md:text-4xl font-light tracking-[0.2em] text-amber-50">
+                СТУДИЯ
+              </h1>
+              <p className="text-2xl md:text-3xl font-serif italic text-amber-400 mt-1">
+                Оксаны Михайловой
+              </p>
+            </div>
           </div>
-          <p className="text-center mt-3 text-pink-100 font-bold text-lg">
-            Создаём сказку своими руками!
-          </p>
         </div>
       </header>
 
-      <section className="relative py-16 overflow-hidden">
+      <section className="relative py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-amber-950/5 to-transparent"></div>
+        
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center bg-white/80 backdrop-blur-sm rounded-3xl p-12 shadow-2xl border-4 border-pink-300">
-            <div className="text-6xl mb-6">🌈</div>
-            <h2 className="text-4xl md:text-5xl font-black mb-6 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
-              Каждая игрушка — это чудо!
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-block px-6 py-2 bg-gradient-to-r from-amber-500/10 to-rose-500/10 rounded-full border border-amber-500/20 mb-8 backdrop-blur-sm">
+              <span className="text-sm tracking-[0.2em] text-amber-400 font-light">АВТОРСКАЯ КОЛЛЕКЦИЯ</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-6xl font-light mb-6 text-amber-50 leading-tight">
+              Эксклюзивные игрушки<br/>
+              <span className="font-serif italic text-amber-400">ручной работы</span>
             </h2>
-            <p className="text-2xl text-gray-700 leading-relaxed mb-8 font-bold">
-              Мы создаём игрушки с любовью и волшебством ✨ 
-              Каждая деталь сделана вручную специально для вашего малыша!
+            
+            <p className="text-xl text-neutral-300 leading-relaxed mb-12 max-w-3xl mx-auto">
+              Каждое изделие создаётся по старинным технологиям с использованием 
+              натуральных материалов и отражает многолетний опыт мастера
             </p>
-            <div className="flex flex-wrap justify-center gap-6 text-lg">
-              <div className="bg-pink-200 px-6 py-3 rounded-full font-bold text-pink-800 shadow-lg">
-                🌟 Ручная работа
+            
+            <div className="flex flex-wrap justify-center gap-8 text-sm">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500/20 to-transparent border border-amber-500/30 flex items-center justify-center">
+                  <Icon name="Award" size={18} className="text-amber-400" />
+                </div>
+                <span className="text-neutral-400 tracking-wide">Премиум качество</span>
               </div>
-              <div className="bg-blue-200 px-6 py-3 rounded-full font-bold text-blue-800 shadow-lg">
-                🎨 Яркие цвета
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500/20 to-transparent border border-amber-500/30 flex items-center justify-center">
+                  <Icon name="Hand" size={18} className="text-amber-400" />
+                </div>
+                <span className="text-neutral-400 tracking-wide">Ручная работа</span>
               </div>
-              <div className="bg-yellow-200 px-6 py-3 rounded-full font-bold text-yellow-800 shadow-lg">
-                💖 С любовью
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500/20 to-transparent border border-amber-500/30 flex items-center justify-center">
+                  <Icon name="Gem" size={18} className="text-amber-400" />
+                </div>
+                <span className="text-neutral-400 tracking-wide">Лимитированные серии</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="relative py-20">
+      <section className="relative py-24 bg-gradient-to-b from-transparent to-neutral-900/50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <div className="text-6xl mb-4">🎪</div>
-            <h3 className="text-5xl font-black mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Наши друзья
+          <div className="text-center mb-16">
+            <h3 className="text-3xl md:text-4xl font-light text-amber-50 tracking-wide mb-4">
+              Коллекция
             </h3>
+            <div className="w-24 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto"></div>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-            {toys.map((toy, index) => (
+          <div className="grid md:grid-cols-3 gap-12 max-w-7xl mx-auto">
+            {toys.map((toy) => (
               <div 
                 key={toy.id}
                 className="group relative"
               >
-                <div className={`absolute -inset-1 ${toy.color} rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition duration-500`}></div>
-                <div className="relative bg-white rounded-3xl overflow-hidden shadow-2xl transform group-hover:scale-105 group-hover:rotate-1 transition-all duration-300">
-                  <div className="aspect-square overflow-hidden bg-gradient-to-br from-pink-100 to-blue-100">
+                <div className="absolute -inset-4 bg-gradient-to-br from-amber-500/10 to-rose-500/10 rounded-2xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <div className="relative bg-neutral-900/50 backdrop-blur-sm rounded-xl overflow-hidden border border-neutral-800 group-hover:border-amber-900/50 transition-all duration-500">
+                  <div className="aspect-square overflow-hidden relative">
+                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent z-10"></div>
                     <img 
                       src={toy.image} 
                       alt={toy.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                   </div>
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <h4 className="text-2xl font-black text-gray-800">
-                        {toy.name}
-                      </h4>
-                      <div className="text-3xl animate-bounce" style={{animationDuration: '1.5s', animationDelay: `${index * 0.2}s`}}>
-                        {index === 0 ? '🧸' : index === 1 ? '🎠' : '👧'}
-                      </div>
-                    </div>
-                    <p className="text-gray-600 mb-4 font-semibold leading-relaxed">
+                  
+                  <div className="p-8">
+                    <h4 className="text-2xl font-light text-amber-50 mb-3 tracking-wide">
+                      {toy.name}
+                    </h4>
+                    <p className="text-neutral-400 mb-6 leading-relaxed text-sm">
                       {toy.description}
                     </p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-3xl font-black bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+                    <div className="flex items-center justify-between pt-6 border-t border-neutral-800">
+                      <span className="text-2xl font-light text-amber-400 tracking-wider">
                         {toy.price}
                       </span>
-                      <div className="text-3xl transform group-hover:scale-125 transition-transform">
-                        ❤️
-                      </div>
+                      <Icon name="ArrowRight" size={20} className="text-amber-600 group-hover:text-amber-400 group-hover:translate-x-1 transition-all" />
                     </div>
                   </div>
                 </div>
@@ -130,38 +138,44 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="relative py-20 bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300">
+      <section className="relative py-24 bg-gradient-to-b from-neutral-900/50 to-transparent">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <div className="text-6xl mb-4">🎉</div>
-              <h3 className="text-5xl font-black text-white drop-shadow-lg">
-                Почему дети нас обожают?
+            <div className="text-center mb-16">
+              <h3 className="text-3xl md:text-4xl font-light text-amber-50 tracking-wide mb-4">
+                Философия мастерства
               </h3>
+              <div className="w-24 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto"></div>
             </div>
             
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center p-8 bg-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all">
-                <div className="text-6xl mb-4">🌲</div>
-                <h4 className="text-2xl font-black mb-3 text-gray-800">Натурально</h4>
-                <p className="text-gray-600 font-bold text-lg">
-                  Только дерево, ткань и безопасные краски!
+              <div className="text-center p-8 bg-neutral-900/30 backdrop-blur-sm rounded-xl border border-neutral-800 hover:border-amber-900/50 transition-all">
+                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-amber-500/20 to-transparent border border-amber-500/30 flex items-center justify-center">
+                  <Icon name="Trees" size={28} className="text-amber-400" />
+                </div>
+                <h4 className="text-xl font-light mb-3 text-amber-50 tracking-wide">Натуральность</h4>
+                <p className="text-neutral-400 text-sm leading-relaxed">
+                  Массив дерева, натуральные ткани и экологичные красители
                 </p>
               </div>
               
-              <div className="text-center p-8 bg-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all">
-                <div className="text-6xl mb-4">🎨</div>
-                <h4 className="text-2xl font-black mb-3 text-gray-800">Красочно</h4>
-                <p className="text-gray-600 font-bold text-lg">
-                  Яркие цвета радуют глаз и поднимают настроение!
+              <div className="text-center p-8 bg-neutral-900/30 backdrop-blur-sm rounded-xl border border-neutral-800 hover:border-amber-900/50 transition-all">
+                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-amber-500/20 to-transparent border border-amber-500/30 flex items-center justify-center">
+                  <Icon name="Paintbrush" size={28} className="text-amber-400" />
+                </div>
+                <h4 className="text-xl font-light mb-3 text-amber-50 tracking-wide">Мастерство</h4>
+                <p className="text-neutral-400 text-sm leading-relaxed">
+                  Старинные техники и многолетний опыт в каждой детали
                 </p>
               </div>
               
-              <div className="text-center p-8 bg-white rounded-3xl shadow-2xl transform hover:scale-105 transition-all">
-                <div className="text-6xl mb-4">✨</div>
-                <h4 className="text-2xl font-black mb-3 text-gray-800">Уникально</h4>
-                <p className="text-gray-600 font-bold text-lg">
-                  Каждая игрушка — особенная и неповторимая!
+              <div className="text-center p-8 bg-neutral-900/30 backdrop-blur-sm rounded-xl border border-neutral-800 hover:border-amber-900/50 transition-all">
+                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-amber-500/20 to-transparent border border-amber-500/30 flex items-center justify-center">
+                  <Icon name="Crown" size={28} className="text-amber-400" />
+                </div>
+                <h4 className="text-xl font-light mb-3 text-amber-50 tracking-wide">Эксклюзивность</h4>
+                <p className="text-neutral-400 text-sm leading-relaxed">
+                  Каждая игрушка уникальна и существует в единственном экземпляре
                 </p>
               </div>
             </div>
@@ -169,47 +183,53 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="relative py-20 bg-gradient-to-br from-blue-100 to-pink-100">
+      <section className="relative py-24 bg-gradient-to-b from-transparent to-neutral-950">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto">
-            <div className="text-7xl mb-6 animate-bounce">📧</div>
-            <h3 className="text-5xl font-black mb-6 bg-gradient-to-r from-pink-600 to-blue-600 bg-clip-text text-transparent">
-              Хочешь заказать?
+            <div className="inline-block p-1 bg-gradient-to-r from-amber-500 to-rose-500 rounded-full mb-8">
+              <div className="bg-neutral-950 rounded-full px-6 py-2">
+                <span className="text-sm tracking-[0.2em] text-amber-400">ИНДИВИДУАЛЬНЫЙ ЗАКАЗ</span>
+              </div>
+            </div>
+            
+            <h3 className="text-3xl md:text-4xl font-light mb-6 text-amber-50 tracking-wide">
+              Создание на заказ
             </h3>
-            <p className="text-2xl text-gray-700 mb-10 font-bold leading-relaxed">
-              Мы создадим игрушку специально для твоего малыша! 
-              Это займёт 2-4 недели волшебства ✨
+            
+            <p className="text-xl text-neutral-300 mb-12 leading-relaxed">
+              Принимаю индивидуальные заказы. Срок создания изделия — 
+              от 2 до 4 недель в зависимости от сложности работы
             </p>
-            <div className="bg-white p-10 rounded-3xl shadow-2xl inline-block border-4 border-pink-300">
-              <p className="text-xl text-gray-700 mb-6 font-bold">
-                Напиши нам прямо сейчас:
+            
+            <div className="bg-gradient-to-br from-neutral-900/80 to-neutral-900/40 backdrop-blur-xl p-10 rounded-2xl border border-neutral-800 inline-block">
+              <p className="text-neutral-400 mb-6 tracking-wide">
+                Для обсуждения проекта:
               </p>
               <a 
-                href="mailto:toys@example.ru"
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white px-10 py-5 rounded-2xl text-2xl font-black hover:scale-110 transition-all shadow-xl"
+                href="mailto:oksana@studio.ru"
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-600 to-amber-500 text-neutral-950 px-8 py-4 rounded-lg text-lg font-medium hover:from-amber-500 hover:to-amber-400 transition-all shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40"
               >
-                <Icon name="Mail" size={32} />
-                toys@example.ru
+                <Icon name="Mail" size={20} />
+                oksana@studio.ru
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      <footer className="relative bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 text-white py-12">
+      <footer className="relative border-t border-neutral-800 bg-neutral-950/90 backdrop-blur-xl py-12">
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="text-4xl">✨</div>
-            <span className="text-3xl font-black drop-shadow-lg">
-              Волшебные Игрушки
-            </span>
-            <div className="text-4xl">🎨</div>
+            <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/30">
+              <Icon name="Sparkles" size={18} className="text-neutral-950" />
+            </div>
+            <div>
+              <p className="text-sm tracking-[0.2em] text-neutral-400">СТУДИЯ</p>
+              <p className="text-lg font-serif italic text-amber-400">Оксаны Михайловой</p>
+            </div>
           </div>
-          <p className="text-xl font-bold mb-2">
-            Создаём радость для детей с 2020 года
-          </p>
-          <p className="text-lg text-pink-100">
-            Каждая игрушка сделана с любовью и волшебством 💖
+          <p className="text-neutral-500 text-sm mt-6">
+            Авторские игрушки премиум-класса
           </p>
         </div>
       </footer>
