@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import Icon from "@/components/ui/icon";
 
 export interface Product {
   id: number;
@@ -7,8 +8,7 @@ export interface Product {
   price: number;
   image: string;
   description: string;
-  features: string[];
-  images?: string[];
+  sizes: string[];
 }
 
 interface ProductCardProps {
@@ -18,54 +18,36 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
   return (
-    <Card className="group overflow-hidden bg-white hover:shadow-xl transition-all duration-500">
-      <div className="grid md:grid-cols-3 gap-4 p-4">
-        {product.images && product.images.length > 0 ? (
-          product.images.map((img, index) => (
-            <div key={index} className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
-              <img
-                src={img}
-                alt={`${product.name} - ${index + 1}`}
-                className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-700"
-              />
-            </div>
-          ))
-        ) : (
-          <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg md:col-span-3">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-full object-contain p-8 group-hover:scale-110 transition-transform duration-700"
-            />
-          </div>
-        )}
-      </div>
-      
-      <div className="p-8 space-y-6">
-        <div className="space-y-3">
-          <h3 className="text-2xl font-bold">{product.name}</h3>
-          <p className="text-muted-foreground leading-relaxed">{product.description}</p>
-        </div>
-        
-        <div className="space-y-2">
-          {product.features.map((feature, index) => (
-            <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
-              <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-              <span>{feature}</span>
-            </div>
-          ))}
-        </div>
-        
-        <div className="flex items-center justify-between pt-4 border-t">
-          <div className="text-3xl font-bold">{product.price.toLocaleString()} ₽</div>
-          <Button 
-            className="rounded-full px-6"
-            onClick={() => onAddToCart(product)}
-          >
-            В корзину
-          </Button>
+    <Card className="group overflow-hidden border-2 hover:border-primary/50 hover:shadow-2xl transition-all duration-300">
+      <div className="relative aspect-square overflow-hidden bg-secondary">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        />
+        <div className="absolute top-3 right-3 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-bold">
+          {product.price} ₽
         </div>
       </div>
+      <CardContent className="p-6 space-y-3">
+        <h3 className="font-bold text-xl">{product.name}</h3>
+        <p className="text-sm text-muted-foreground leading-relaxed">{product.description}</p>
+        <div className="flex items-center gap-2 pt-2">
+          <Icon name="Ruler" size={18} className="text-primary" />
+          <span className="text-sm font-medium">
+            {product.sizes.join(' · ')}
+          </span>
+        </div>
+      </CardContent>
+      <CardFooter className="p-6 pt-0">
+        <Button 
+          className="w-full h-12 text-base font-semibold shadow-md hover:shadow-lg transition-shadow" 
+          onClick={() => onAddToCart(product)}
+        >
+          <Icon name="ShoppingBag" size={20} className="mr-2" />
+          Добавить в корзину
+        </Button>
+      </CardFooter>
     </Card>
   );
 }
